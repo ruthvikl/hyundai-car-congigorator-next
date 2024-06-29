@@ -32,14 +32,14 @@ export default function Page() {
         <img src='/logo.png' alt='logo' className='w-2/12 mt-5 mx-auto' />
         <div className='h-full flex flex-col justify-evenly'>
           {Object.entries(cars).map(([car]) => {
-            return <Logo route='/blob' car={car} key={car} />
+            return <Logo route='/trim' car={car} key={car} />
           })}
         </div>
 
         <div className='w-full text-center md:w-3/5'>
           {/* <View className='flex h-96 w-full flex-col items-center justify-center'>
             <Suspense fallback={null}> */}
-              {/* <Logo route='/blob' /> */}
+              {/* <Logo route='/trim' /> */}
               {/* <Common />
             </Suspense>
           </View> */}
@@ -64,7 +64,7 @@ export default function Page() {
         <div className='relative my-12 h-48 w-full py-6 sm:w-1/2 md:mb-40'>
           <View orbit className='relative h-full animate-bounce sm:h-48 sm:w-full'>
             <Suspense fallback={null}>
-              <Duck route='/blob' scale={2} position={[0, -1.6, 0]} />
+              <Duck route='/trim' scale={2} position={[0, -1.6, 0]} />
               <Common color={'lightblue'} />
             </Suspense>
           </View>

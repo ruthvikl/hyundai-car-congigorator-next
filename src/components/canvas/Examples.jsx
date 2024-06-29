@@ -8,7 +8,7 @@ import { Line, useCursor, MeshDistortMaterial } from '@react-three/drei'
 import { useRouter } from 'next/navigation'
 import { cars } from '@/data/cars.js'
 
-export const Blob = ({ route = '/', ...props }) => {
+export const trim = ({ route = '/', ...props }) => {
   const router = useRouter()
   const [hovered, hover] = useState(false)
   useCursor(hovered)
@@ -24,7 +24,7 @@ export const Blob = ({ route = '/', ...props }) => {
   )
 }
 
-export const Logo = ({ route = '/blob', ...props }) => {
+export const Logo = ({ route = '/trim', ...props }) => {
   const { car } = props
   const router = useRouter()
 

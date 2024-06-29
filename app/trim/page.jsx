@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic'
 import { Suspense, useState } from 'react'
 import { cars } from '@/data/cars'
 
-const Blob = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Blob), { ssr: false })
+const trim = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.trim), { ssr: false })
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
   loading: () => (
@@ -41,7 +41,7 @@ export default function Page() {
                 <div className='flex flex-col justify-evenly w-full h-full'>
                   <View orbit className='h-96 sm:h-48 sm:w-full'>
                     <Suspense fallback={null}>
-                      <Duck route='/blob' scale={2} position={[0, -1.6, 0]} model={cars[selectedModel][trim].exteriorModel.model} />
+                      <Duck route='/trim' scale={2} position={[0, -1.6, 0]} model={cars[selectedModel][trim].exteriorModel.model} />
                       <Common color={'gray'} />
                     </Suspense>
                   </View>
@@ -49,7 +49,7 @@ export default function Page() {
                     <p className='text-center mt-5'>{trim}</p>
                     <p className='text-xs text-center font-[HyundaiSansHead-Light]'>{cars[selectedModel][trim].description}</p>
                   </div>
-                  <div className='text-center border-2 py-2 border-black w-full mt-10 font-[HyundaiSansHead-Regular]' >
+                  <div className='text-center border-2 py-2 border-black w-full mt-10 font-[HyundaiSansHead-Regular]'>
                     Select {trim}
                     <span className='absolute right-5'>
                       <svg

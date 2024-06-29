@@ -58,34 +58,34 @@ const cars = {
             },
             'exteriorColors': {
                 'Atlas White': {
-                    'image': 'atlasWhite',
+                    'image': 'atlas-white',
                     'name': 'Atlas White',
                     'color': '#BCBDBE'
                 },
                 'Abyss Black': {
-                    'image': 'abyssBlack',
+                    'image': 'abyss-black',
                     'name': 'Abyss Black',
                     'color': '#000000'
                 },
                 'Cyber Gray': {
-                    'image': 'cyberGray',
+                    'image': 'cyber-gray',
                     'name': 'Cyber Gray',
                     'color': '#707172'
                 },
                 'Digital Teal': {
-                    'image': 'digitalTeal',
+                    'image': 'digital-teal',
                     'name': 'Digital Teal',
                     'color': '#1E3639'
                 },
                 'Lucid Blue': {
-                    'image': 'lucidBlue',
+                    'image': 'lucid-blue',
                     'name': 'Lucid Blue',
                     'color': '#354450'
                 }
             },
             'interiorColors': {
                 'Black': {
-                    'image': 'abyssBlack',
+                    'image': 'abyss-black',
                     'name': 'Black',
                     'color': '#000000'
                 },
@@ -138,7 +138,7 @@ const cars = {
             },
             'exteriorColors': {
                 'Abyss Black': {
-                    'image': 'abyssBlack',
+                    'image': 'abyss-black',
                     'name': 'Abyss Black',
                     'color': '#000000'
                 },
@@ -148,12 +148,12 @@ const cars = {
                     'color': '#434449'
                 },
                 'Lucid Blue': {
-                    'image': 'lucidBlue',
+                    'image': 'lucid-blue',
                     'name': 'Lucid Blue',
                     'color': '#354450'
                 },
                 'Digital Teal': {
-                    'image': 'digitalTeal',
+                    'image': 'digital-teal',
                     'name': 'Digital Teal',
                     'color': '#1E3639'
                 },
@@ -163,19 +163,19 @@ const cars = {
                     'color': '#A4A3A3'
                 },
                 'Cyber Gray': {
-                    'image': 'cyberGray',
+                    'image': 'cyber-gray',
                     'name': 'Cyber Gray',
                     'color': '#707172'
                 },
                 'Atlas White': {
-                    'image': 'atlasWhite',
+                    'image': 'atlas-white',
                     'name': 'Atlas White',
                     'color': '#BCBDBE'
                 }
             },
             'interiorColors': {
                 'Black': {
-                    'image': 'abyssBlack',
+                    'image': 'abyss-black',
                     'name': 'Black',
                     'color': '#000000'
                 },
@@ -287,7 +287,7 @@ const cars = {
             },
             'interiorColors': {
                 'Black': {
-                    'image': 'abyssBlack',
+                    'image': 'abyss-black',
                     'name': 'Black',
                     'color': '#000000'
                 },
@@ -343,7 +343,7 @@ const cars = {
             },
             'interiorColors': {
                 'Black': {
-                    'image': 'abyssBlack',
+                    'image': 'abyss-black',
                     'name': 'Black',
                     'color': '#000000'
                 },
@@ -404,7 +404,7 @@ const cars = {
             },
             'interiorColors': {
                 'Black': {
-                    'image': 'abyssBlack',
+                    'image': 'abyss-black',
                     'name': 'Black',
                     'color': '#000000'
                 },
