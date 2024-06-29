@@ -1,12 +1,15 @@
 'use client'
 
+import { Duck } from '@/components/canvas/Examples'
 import dynamic from 'next/dynamic'
+import { Suspense, useState } from 'react'
+import { cars } from '@/data/cars'
 
 const Blob = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Blob), { ssr: false })
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
   loading: () => (
-    <div className='flex h-96 w-full flex-col items-center justify-center'>
+    <div className='flex h-full w-full flex-col items-center justify-center'>
       <svg className='-ml-1 mr-3 h-5 w-5 animate-spin text-black' fill='none' viewBox='0 0 24 24'>
         <circle className='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' strokeWidth='4' />
         <path
@@ -21,20 +24,51 @@ const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.
 const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Common), { ssr: false })
 
 export default function Page() {
+  const [selectedModel, setSelectedModel] = useState('IONIQ 5');
   return (
-    <>
-      <div className='mx-auto flex w-full flex-col flex-wrap items-center md:flex-row  lg:w-4/5'>
-        <div className='flex w-full flex-col items-start justify-center p-12 text-center md:w-2/5 md:text-left'>
-          <p className='w-full uppercase'>Next + React Three Fiber</p>
-          <h1 className='my-4 text-5xl font-bold leading-tight'>Next 3D Starter</h1>
-          <p className='mb-8 text-2xl leading-normal'>A minimalist starter for React, React-three-fiber and Threejs.</p>
-        </div>
+    <div className='flex flex-col gap-2 mx-auto w-full h-screen'>
+      <img src='/logo.png' alt='logo' className='w-2/12 mt-5 mx-auto' />
+      <h1 className='text-3xl text-center'>{selectedModel}</h1>
+      <p className='font-[HyundaiSansHead-Medium] text-center'>Choose a Trim</p>
+      <div className='flex flex-row gap-5 w-full overflow-x-scroll h-full justify-evenly px-5'>
+        {Object.keys(cars[selectedModel]).map((trim) =>{
+          // console.log(cars[selectedModel][trim].exteriorModel.model)
+         return (
+          <div key={trim}>
+            {trim === 'image' ? null : (
+                <div className='text-black min-w-80 mx-auto py-5 items-center flex flex-col rounded-lg cursor-pointer h-full mt-5
+                  bg-gradient-to-br from-gray-200 to-transparent bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-40'>
+                <div className='flex flex-col justify-evenly w-full h-full'>
+                  <View orbit className='h-96 sm:h-48 sm:w-full'>
+                    <Suspense fallback={null}>
+                      <Duck route='/blob' scale={2} position={[0, -1.6, 0]} model={cars[selectedModel][trim].exteriorModel.model} />
+                      <Common color={'gray'} />
+                    </Suspense>
+                  </View>
+                  <div>
+                    <p className='text-center mt-5'>{trim}</p>
+                    <p className='text-xs text-center font-[HyundaiSansHead-Light]'>{cars[selectedModel][trim].description}</p>
+                  </div>
+                  <div className='text-center border-2 py-2 border-black w-full mt-10 font-[HyundaiSansHead-Regular]' >
+                    Select {trim}
+                    <span className='absolute right-5'>
+                      <svg
+                          xmlns='http://www.w3.org/2000/svg'
+                          fill='none'
+                          viewBox='0 0 24 24'
+                          strokeWidth='2.5'
+                          stroke='currentColor'
+                          className='size-6'>
+                          <path strokeLinecap='round' strokeLinejoin='round' d='m8.25 4.5 7.5 7.5-7.5 7.5' />
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        )})}
       </div>
-
-      <View className='absolute top-0 flex h-screen w-full flex-col items-center justify-center'>
-        <Blob />
-        <Common />
-      </View>
-    </>
+    </div>
   )
 }
