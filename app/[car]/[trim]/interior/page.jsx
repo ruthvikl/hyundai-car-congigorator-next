@@ -25,14 +25,18 @@ const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mo
 
 export default function Page({ params }) {
   const searchParams = useSearchParams()
-  const exteriorColor = searchParams.get('color') || 'defaultColor'
-  console.log(exteriorColor)
+  const exteriorColor = searchParams.get('exteriorColor') || 'defaultColor'
   let { trim, car } = params
   trim = decodeURIComponent(trim)
   car = decodeURIComponent(car)
   const [selectedColor, setSelectedColor] = useState(Object.keys(cars[car][trim].interiorColors)[0])
 
   const router = useRouter()
+  const handleSelectClick = () => {
+    router.push(`/${car}/${trim}/summary?exteriorColor=${exteriorColor}&interiorColor=${selectedColor}`)
+  }
+
+
   const handleBackClick = () => {
     router.push(`/${car}/${trim}/exterior`)
   }
@@ -40,7 +44,6 @@ export default function Page({ params }) {
     <div>
       <h1 className='text-3xl text-center'>{car}</h1>
       <p className='text-center text-lg'>{trim}</p>
-      <p className='text-center text-lg'>Customize your vehicle</p>
       <div className='mt-2 w-11/12 mx-auto relative rounded-xl'>
         <View orbit className='h-96 sm:h-48 sm:w-full'>
           <Suspense fallback={null}>
@@ -68,7 +71,8 @@ export default function Page({ params }) {
         </div>
       </div>
       <div
-        className='text-center border-2 py-2 flex relative flex-row justify-center border-black w-10/12 mx-auto font-[HyundaiSansHead-Medium] cursor-pointer'>
+        className='text-center border-2 py-2 flex relative flex-row justify-center border-black w-10/12 mx-auto font-[HyundaiSansHead-Medium] cursor-pointer'
+        onClick={handleSelectClick}>
         <span>Select {selectedColor}</span>
         <span>
           <svg

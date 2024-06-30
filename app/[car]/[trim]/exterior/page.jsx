@@ -31,7 +31,7 @@ export default function Page({ params }) {
   car = decodeURIComponent(car)
   const [selectedColor, setSelectedColor] = useState(Object.keys(cars[car][trim].exteriorColors)[0])
   const handleSelectClick = () => {
-    router.push(`/${car}/${trim}/interior?color=${selectedColor}`)
+    router.push(`/${car}/${trim}/interior?exteriorColor=${selectedColor}`)
   }
 
   const handleBackClick = () => {
