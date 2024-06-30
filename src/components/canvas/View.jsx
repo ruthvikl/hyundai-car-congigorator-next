@@ -1,6 +1,6 @@
 'use client'
 
-import { forwardRef, Suspense, useImperativeHandle, useRef } from 'react'
+import { forwardRef, Suspense, useImperativeHandle, useRef, useEffect } from 'react'
 import { OrbitControls, Environment, PerspectiveCamera, View as ViewImpl } from '@react-three/drei'
 import { Three } from '@/helpers/components/Three'
 import { useLoader, useThree } from '@react-three/fiber'
@@ -59,6 +59,13 @@ const Interior = ({ color }) => {
 
 const Common = ({ color }) => {
   console.log('Common')
+  const orbitRef = useRef();
+
+  useEffect(() => {
+    if (orbitRef.current) {
+      orbitRef.current.domElement.style.pointerEvents = 'none';
+    }
+  }, []);
   return (
     <Suspense fallback={null}>
       {color && <color attach='background' args={[color]} />}
@@ -66,10 +73,14 @@ const Common = ({ color }) => {
       <ambientLight intensity={2} />
       <PerspectiveCamera makeDefault fov={60} position={[-6, 0, 6]} />
       <OrbitControls
+        ref={orbitRef}
         enableZoom={false}
         minPolarAngle={Math.PI / 5}
         maxPolarAngle={Math.PI / 2.5}
         target={[0, 0, 0]}
+        autoRotate={true}
+        autoRotateSpeed={1.0}
+        enableTouch={false}
       />
     </Suspense>
   )
