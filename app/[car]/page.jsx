@@ -34,18 +34,21 @@ export default function Page({ params }) {
   }
 
   return (
-    <div>
+    <div className='overflow-y-scroll h-full flex flex-col gap-2 mx-auto w-full'>
       <h1 className='text-3xl text-center'>{selectedModel}</h1>
       <p className='font-[HyundaiSansHead-Medium] text-center'>Choose a Trim</p>
-      <div className='flex flex-row gap-5 w-full overflow-x-scroll h-full justify-evenly px-5'>
-        {Object.keys(cars[selectedModel]).map((trim) => (
-          <div key={trim}>
-            {trim === 'image' ? null : (
-              <div
-                className='text-black min-w-80 mx-auto py-5 items-center flex flex-col rounded-lg cursor-pointer h-full mt-5
+      <div className='flex flex-row gap-5 w-full h-fit overflow-x-scroll justify-evenly px-5'>
+        {Object.keys(cars[selectedModel]).map((trim) => {
+          // return only if trim is image
+          if (trim === 'image') {
+            return null
+          }
+          return (
+           <div key={trim} className='h-fit'>
+              {trim === 'image' ? null : (
+              <div className='text-black min-w-72 mx-auto py-5 items-center rounded-lg cursor-pointer h-fit mt-5
                   bg-gradient-to-br from-gray-200 to-transparent bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-40'>
-                <div className='flex flex-col justify-evenly w-full h-full'>
-                  <View orbit className='h-96 sm:h-48 sm:w-full'>
+                  <View orbit className='h-48'>
                     <Suspense fallback={null}>
                       <Duck route='/trim' scale={2} position={[0, -1.6, 0]} model={cars[selectedModel][trim].exteriorModel.model} />
                       <Common color={'gray'} />
@@ -73,11 +76,23 @@ export default function Page({ params }) {
                       </svg>
                     </span>
                   </div>
-                </div>
               </div>
             )}
           </div>
-        ))}
+          )
+        })}
+      </div>
+      <div className='text-center w-1/5 flex flex-row mx-auto mt-5 items-center justify-evenly font-[HyundaiSansHead-Light]'>
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          fill='none'
+          viewBox='0 0 24 24'
+          strokeWidth='1.5'
+          stroke='currentColor'
+          className='size-4'>
+          <path strokeLinecap='round' strokeLinejoin='round' d='M15.75 19.5 8.25 12l7.5-7.5' />
+        </svg>
+        <p>Back</p>
       </div>
     </div>
   )

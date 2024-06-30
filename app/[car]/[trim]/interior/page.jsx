@@ -6,7 +6,6 @@ import dynamic from 'next/dynamic'
 import { Suspense, useState } from 'react'
 import { cars } from '@/data/cars'
 
-const trim = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.trim), { ssr: false })
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
   loading: () => (
@@ -29,50 +28,74 @@ export default function Page({ params }) {
   const exteriorColor = searchParams.get('color') || 'defaultColor'
   console.log(exteriorColor)
   let { trim, car } = params
+  trim = decodeURIComponent(trim)
   car = decodeURIComponent(car)
   const [selectedColor, setSelectedColor] = useState(Object.keys(cars[car][trim].interiorColors)[0])
+
+  const router = useRouter()
+  const handleBackClick = () => {
+    router.push(`/${car}/${trim}/exterior`)
+  }
   return (
     <div>
-        <h1 className='text-3xl text-center'>{car}</h1>
-        <p className='text-center text-lg'>{trim}</p>
-        <div className='mt-2 w-11/12 mx-auto relative rounded-xl h-4/5'>
-          <View orbit className='h-96 sm:h-48 sm:w-full'>
-            <Suspense fallback={null}>
-            <Duck route='/trim' scale={2} position={[0, -1.6, 0]} model={cars[car][trim].exteriorModel.model} />
+      <h1 className='text-3xl text-center'>{car}</h1>
+      <p className='text-center text-lg'>{trim}</p>
+      <p className='text-center text-lg'>Customize your vehicle</p>
+      <div className='mt-2 w-11/12 mx-auto relative rounded-xl'>
+        <View orbit className='h-96 sm:h-48 sm:w-full'>
+          <Suspense fallback={null}>
+            <Duck
+              route='/trim'
+              scale={2}
+              position={[0, -1.6, 0]}
+              model={cars[car][trim].exteriorModel.model}
+            />
             <Common color={cars[car][trim].interiorColors[selectedColor].color} />
-            </Suspense>
-          </View>
-          <div className='absolute bottom-5 z-10'>
-            <div className='flex flex-row justify-evenly overflow-x-auto px-2 py-1 rounded-full gap-5 w-11/12 bg-opacity-70 bg-gray-100 mx-auto'>
-            {Object.keys(cars[car][trim].interiorColors).map(color => {
-              return (
+          </Suspense>
+        </View>
+        <div className='relative bottom-11 z-10'>
+          <div className='flex flex-row justify-evenly overflow-x-auto px-2 py-1 rounded-full gap-5 w-11/12 bg-opacity-70 bg-gray-100 mx-auto'>
+            {Object.keys(cars[car][trim].interiorColors).map((color) => (
               <img
                 key={color}
                 alt={color}
                 onClick={() => setSelectedColor(color)}
                 src={`/colors/${cars[car][trim].interiorColors[color].image}.png`}
-              className={`w-1/12 h-1/12 lg:w-1/12 ${selectedColor === color ? 'border-2 border-white rounded-full' : ''}`}
+                className={`w-1/12 h-1/12 lg:w-1/12 ${selectedColor === color ? 'border-2 border-white rounded-full' : ''}`}
               />
-            )})}
-            </div>
+            ))}
           </div>
         </div>
-        <div className='text-center border-2 py-2 flex flex-row border-black w-10/12 mx-auto font-[HyundaiSansHead-Regular]' >
-            <span>
-              Select {selectedColor}
-            </span>
-            <span className=''>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              fill='none'
-              viewBox='0 0 24 24'
-              strokeWidth='2.5'
-              stroke='currentColor'
-              className='size-6'>
-              <path strokeLinecap='round' strokeLinejoin='round' d='m8.25 4.5 7.5 7.5-7.5 7.5' />
-            </svg>
-            </span>
-        </div>
+      </div>
+      <div
+        className='text-center border-2 py-2 flex relative flex-row justify-center border-black w-10/12 mx-auto font-[HyundaiSansHead-Medium] cursor-pointer'>
+        <span>Select {selectedColor}</span>
+        <span>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 24 24'
+            strokewtrimth='2.5'
+            stroke='currentColor'
+            className='size-6 absolute right-0'
+          >
+            <path strokeLinecap='round' strokeLinejoin='round' d='M8.25 4.5l7.5 7.5-7.5 7.5' />
+          </svg>
+        </span>
+      </div>
+      <div className='text-center w-1/5 flex flex-row mx-auto mt-5 items-center justify-evenly font-[HyundaiSansHead-Light]'
+        onClick={handleBackClick}>
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          fill='none'
+          viewBox='0 0 24 24'
+          strokeWidth='1.5'
+          stroke='currentColor'
+          className='size-4'>
+          <path strokeLinecap='round' strokeLinejoin='round' d='M15.75 19.5 8.25 12l7.5-7.5' />
+        </svg>
+        <p>Back</p>
+      </div>
     </div>
   )
 }

@@ -34,6 +34,10 @@ export default function Page({ params }) {
     router.push(`/${car}/${trim}/interior?color=${selectedColor}`)
   }
 
+  const handleBackClick = () => {
+    router.push(`/${car}/`)
+  }
+
   return (
     <div>
       <h1 className='text-3xl text-center'>{car}</h1>
@@ -66,9 +70,8 @@ export default function Page({ params }) {
         </div>
       </div>
       <div
-        className='text-center border-2 py-2 flex flex-row border-black w-10/12 mx-auto font-[HyundaiSansHead-Regular] cursor-pointer'
-        onClick={handleSelectClick}
-      >
+        className='text-center border-2 py-2 flex relative flex-row justify-center border-black w-10/12 mx-auto font-[HyundaiSansHead-Medium] cursor-pointer'
+        onClick={handleSelectClick}>
         <span>Select {selectedColor}</span>
         <span>
           <svg
@@ -77,11 +80,25 @@ export default function Page({ params }) {
             viewBox='0 0 24 24'
             strokewtrimth='2.5'
             stroke='currentColor'
-            className='size-6'
+            className='size-6 absolute right-0'
           >
             <path strokeLinecap='round' strokeLinejoin='round' d='M8.25 4.5l7.5 7.5-7.5 7.5' />
           </svg>
         </span>
+      </div>
+
+      <div className='text-center w-1/5 flex flex-row mx-auto mt-5 items-center justify-evenly font-[HyundaiSansHead-Light]'
+        onClick={handleBackClick}>
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          fill='none'
+          viewBox='0 0 24 24'
+          strokeWidth='1.5'
+          stroke='currentColor'
+          className='size-4'>
+          <path strokeLinecap='round' strokeLinejoin='round' d='M15.75 19.5 8.25 12l7.5-7.5' />
+        </svg>
+        <p>Back</p>
       </div>
     </div>
   )

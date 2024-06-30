@@ -17,3 +17,31 @@
     overflow: hidden;
   }
 }
+
+@layer base {
+  @font-face {
+    font-family: 'HyundaiSansHead-Bold';
+    src: url(/fonts/HyundaiSansHead-Bold.otf) format('opentype');
+  }
+
+  @font-face {
+    font-family: 'HyundaiSansHead-Light';
+    src: url(/fonts/HyundaiSansHead-Light.otf) format('opentype');
+  }
+
+  @font-face {
+    font-family: 'HyundaiSansHead-Medium';
+    src: url(/fonts/HyundaiSansHead-Medium.ttf) format('truetype');
+  }
+
+  @font-face {
+    font-family: 'HyundaiSansHead-Regular';
+    src: url(/fonts/HyundaiSansHead-Regular.otf) format('opentype');
+    src: url(/fonts/HyundaiSansHead-Regular.ttf) format('truetype');
+  }
+
+  @font-face {
+    font-family: 'HyundaiSansText-Regular';
+    src: url(/fonts/HyundaiSansText-Regular.otf) format('opentype');
+  }
+}
