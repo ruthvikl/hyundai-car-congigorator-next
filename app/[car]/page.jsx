@@ -50,7 +50,7 @@ export default function Page({ params }) {
                   bg-gradient-to-br from-gray-200 to-transparent bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-40'>
                   <View orbit className='h-48'>
                     <Suspense fallback={null}>
-                      <Duck route='/trim' scale={2} position={[0, -1.6, 0]} model={cars[selectedModel][trim].exteriorModel.model} />
+                      <Duck route='/trim' scale={2} position={[0, 0, 0]} model={cars[selectedModel][trim].exteriorModel.model} />
                       <Common color={'gray'} />
                     </Suspense>
                   </View>

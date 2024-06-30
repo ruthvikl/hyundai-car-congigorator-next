@@ -21,7 +21,7 @@ const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.
     </div>
   ),
 })
-const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Common), { ssr: false })
+const Interior = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Interior), { ssr: false })
 
 export default function Page({ params }) {
   const searchParams = useSearchParams()
@@ -49,11 +49,11 @@ export default function Page({ params }) {
           <Suspense fallback={null}>
             <Duck
               route='/trim'
-              scale={2}
-              position={[0, -1.6, 0]}
+              scale={12}
+              position={[4, 3, 0]}
               model={cars[car][trim].interiorModel.model[selectedColor]}
             />
-            <Common color={cars[car][trim].interiorColors[selectedColor].color} />
+            <Interior color={cars[car][trim].interiorColors[selectedColor].color} />
           </Suspense>
         </View>
         <div className='relative bottom-11 z-10'>
