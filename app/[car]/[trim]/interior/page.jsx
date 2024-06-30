@@ -30,17 +30,16 @@ export default function Page({ params }) {
   console.log(exteriorColor)
   let { trim, car } = params
   car = decodeURIComponent(car)
-  const [selectedColor, setSelectedColor] = useState('gray');
+  const [selectedColor, setSelectedColor] = useState(Object.keys(cars[car][trim].interiorColors)[0])
   return (
-    <div className='flex flex-col gap-2 mx-auto w-full h-screen'>
-        <img src='/logo.png' alt='logo' className='w-2/12 mt-5 mx-auto' />
+    <div>
         <h1 className='text-3xl text-center'>{car}</h1>
         <p className='text-center text-lg'>{trim}</p>
         <div className='mt-2 w-11/12 mx-auto relative rounded-xl h-4/5'>
           <View orbit className='h-96 sm:h-48 sm:w-full'>
             <Suspense fallback={null}>
             <Duck route='/trim' scale={2} position={[0, -1.6, 0]} model={cars[car][trim].exteriorModel.model} />
-            <Common color={'gray'} />
+            <Common color={cars[car][trim].interiorColors[selectedColor].color} />
             </Suspense>
           </View>
           <div className='absolute bottom-5 z-10'>

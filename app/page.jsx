@@ -27,24 +27,18 @@ const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mo
 
 export default function Page() {
   return (
-    <>
-    <div className='flex flex-col gap-2 mx-auto w-full h-screen'>
-        <img src='/logo.png' alt='logo' className='w-2/12 mt-5 mx-auto' />
-        <div className='h-full flex flex-col justify-evenly'>
-          {Object.entries(cars).map(([car]) => {
-            return <Logo route='/trim' car={car} key={car} />
-          })}
-        </div>
-
-        <div className='w-full text-center md:w-3/5'>
-          {/* <View className='flex h-96 w-full flex-col items-center justify-center'>
-            <Suspense fallback={null}> */}
-              {/* <Logo route='/trim' /> */}
-              {/* <Common />
-            </Suspense>
-          </View> */}
-        </div>
-      </div>
+    <div className='h-full flex flex-col justify-evenly overflow-y-scroll mt-2'>
+      {Object.entries(cars).map(([car]) => {
+        return <Logo route='/trim' car={car} key={car} />
+      })}
+      {/* <div className='w-full text-center md:w-3/5'> */}
+        {/* <View className='flex h-96 w-full flex-col items-center justify-center'>
+          <Suspense fallback={null}> */}
+            {/* <Logo route='/trim' /> */}
+            {/* <Common />
+          </Suspense>
+        </View> */}
+      {/* </div> */}
 
       {/* <div className='mx-auto flex w-full flex-col flex-wrap items-center p-12 md:flex-row  lg:w-4/5'>
 
@@ -79,6 +73,6 @@ export default function Page() {
           </p>
         </div>
       </div> */}
-    </>
+    </ div>
   )
 }

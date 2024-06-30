@@ -34,8 +34,7 @@ export default function Page({ params }) {
   }
 
   return (
-    <div className='flex flex-col gap-2 mx-auto w-full h-screen'>
-      <img src='/logo.png' alt='logo' className='w-2/12 mt-5 mx-auto' />
+    <div>
       <h1 className='text-3xl text-center'>{selectedModel}</h1>
       <p className='font-[HyundaiSansHead-Medium] text-center'>Choose a Trim</p>
       <div className='flex flex-row gap-5 w-full overflow-x-scroll h-full justify-evenly px-5'>

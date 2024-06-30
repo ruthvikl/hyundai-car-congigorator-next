@@ -139,7 +139,7 @@ const cars = {
                     'color': '#000000'
                 },
                 'Gray Green 2 Tone': {
-                    'image': 'grayGreen2Tone',
+                    'image': 'abyss-black',
                     'name': 'Gray Green 2 Tone',
                     'color': '#6D6E6F'
                 }
@@ -179,7 +179,7 @@ const cars = {
             },
             'interiorColors': {
                 'Terra Brown 2 Tone': {
-                    'image': 'terraBrown2Tone',
+                    'image': 'gravity-gold-matt',
                     'name': 'Terra Brown 2 Tone',
                     'color': '#6D6E6F'
                 }
@@ -307,7 +307,7 @@ const cars = {
                     'color': '#000000'
                 },
                 'Gray': {
-                    'image': 'grayGreen2Tone',
+                    'image': 'abyss-black',
                     'name': 'Gray',
                     'color': '#6D6E6F'
                 }
@@ -368,7 +368,7 @@ const cars = {
                     'color': '#000000'
                 },
                 'Gray': {
-                    'image': 'grayGreen2Tone',
+                    'image': 'abyss-black',
                     'name': 'Gray',
                     'color': '#6D6E6F'
                 }

@@ -20,7 +20,7 @@ export const Logo = ({ route = '/trim', ...props }) => {
         router.push(`/${car}/`)
       }}
       key={car}
-      className='text-black w-10/12 mx-auto mb-5 items-center flex rounded-lg cursor-pointer mt-10 
+      className='text-black w-10/12 mx-auto items-center flex rounded-lg cursor-pointer mb-5
           bg-gradient-to-br from-gray-200 to-[#dfdfdf] bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-40 drop-shadow shadow-lg shadow-white'
       role='button'
       tabIndex={0}

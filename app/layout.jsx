@@ -15,8 +15,11 @@ export default function RootLayout({ children }) {
       */}
       <head />
       <body>
-        {/* To avoid FOUT with styled-components wrap Layout with StyledComponentsRegistry https://beta.nextjs.org/docs/styling/css-in-js#styled-components */}
-        <Layout>{children}</Layout>
+        <div className='flex flex-col gap-2 mx-auto w-full h-screen overflow-y-scroll'>
+          <img src='/logo.png' alt='logo' className='w-2/12 mt-2 mx-auto' />
+          {/* To avoid FOUT with styled-components wrap Layout with StyledComponentsRegistry https://beta.nextjs.org/docs/styling/css-in-js#styled-components */}
+          <Layout>{children}</Layout>
+        </div>
       </body>
     </html>
   )

@@ -25,22 +25,21 @@ const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.
 const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Common), { ssr: false })
 
 export default function Page({ params }) {
-  const [selectedColor, setSelectedColor] = useState('gray')
   const router = useRouter()
   let { trim, car } = params
   trim = decodeURIComponent(trim)
   car = decodeURIComponent(car)
+  const [selectedColor, setSelectedColor] = useState(Object.keys(cars[car][trim].exteriorColors)[0])
   const handleSelectClick = () => {
     router.push(`/${car}/${trim}/interior?color=${selectedColor}`)
   }
 
   return (
-    <div className='flex flex-col gap-2 mx-auto w-full h-screen'>
-      <img src='/logo.png' alt='logo' className='w-2/12 mt-5 mx-auto' />
+    <div>
       <h1 className='text-3xl text-center'>{car}</h1>
       <p className='text-center text-lg'>{trim}</p>
       <p className='text-center text-lg'>Customize your vehicle</p>
-      <div className='mt-2 w-11/12 mx-auto relative rounded-xl h-4/5'>
+      <div className='mt-2 w-11/12 mx-auto relative rounded-xl'>
         <View orbit className='h-96 sm:h-48 sm:w-full'>
           <Suspense fallback={null}>
             <Duck
@@ -49,10 +48,10 @@ export default function Page({ params }) {
               position={[0, -1.6, 0]}
               model={cars[car][trim].exteriorModel.model}
             />
-            <Common color={selectedColor} />
+            <Common color={cars[car][trim].exteriorColors[selectedColor].color} />
           </Suspense>
         </View>
-        <div className='absolute bottom-5 z-10'>
+        <div className='relative bottom-11 z-10'>
           <div className='flex flex-row justify-evenly overflow-x-auto px-2 py-1 rounded-full gap-5 w-11/12 bg-opacity-70 bg-gray-100 mx-auto'>
             {Object.keys(cars[car][trim].exteriorColors).map((color) => (
               <img
