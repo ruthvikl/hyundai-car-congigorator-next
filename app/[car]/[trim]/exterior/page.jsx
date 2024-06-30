@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic'
 import { Suspense, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { cars } from '@/data/cars'
+import { Hotspot } from '@/components/canvas/Hotspot'
 
 const Trim = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.trim), { ssr: false })
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
@@ -22,7 +23,7 @@ const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.
     </div>
   ),
 })
-const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Common), { ssr: false })
+const Exterior = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Exterior), { ssr: false })
 
 export default function Page({ params }) {
   const router = useRouter()
@@ -38,6 +39,10 @@ export default function Page({ params }) {
     router.push(`/${car}/`)
   }
 
+  const handleHotspotHeadLight = () => {
+    console.log('Hotspot Exterior SE clicked!');
+  };
+
   return (
     <div>
       <h1 className='text-3xl text-center'>{car}</h1>
@@ -46,13 +51,20 @@ export default function Page({ params }) {
       <div className='mt-2 w-11/12 mx-auto relative rounded-xl'>
         <View orbit className='h-96 sm:h-48 sm:w-full'>
           <Suspense fallback={null}>
-            <Duck
-              route='/trim'
-              scale={2}
-              position={[0, -1.6, 0]}
-              model={cars[car][trim].exteriorModel.model}
-            />
-            <Common color={cars[car][trim].exteriorColors[selectedColor].color} />
+            <group position={[0, 0.3, 0]}>
+              <Duck
+                route='/trim'
+                scale={12}
+                model={cars[car][trim].exteriorModel.model}
+              />
+              <Hotspot
+                position={[-29, 5, 7]}
+                rotation={[0, 15, 0]}
+                scale={[2, 2, 2]}
+                onClick={handleHotspotHeadLight}
+              />
+            </group>
+            <Exterior color={cars[car][trim].exteriorColors[selectedColor].color} />
           </Suspense>
         </View>
         <div className='relative bottom-11 z-10'>
