@@ -1,44 +1,3 @@
-// Model Images
-// // Car Trims ioniq5
-// import SE from '../assets/ioniq5/se.webp'
-// import limited from '../assets/ioniq5/limited.webp'
-// import D100PlatinumEdition from '../assets/ioniq5/D100-Platinum-Edition.webp'
-
-// // Car Trims ioniq6
-// import SEL6 from '../assets/ioniq6/SEL.webp'
-// import SE6 from '../assets/ioniq6/SE.webp'
-// import Limited6 from '../assets/ioniq6/Limited.webp'
-
-
-// // Car Models
-// import ioniq6SeInterior from '../assets/models/Ioniq5_SE_Black_V2.glb'
-// import ioniq6Exterior from '../assets/models/ioniq6Exterior.glb'
-// import ioniq5LimitedGreyGreen from '../assets/models/Ioniq_5_Limited_Grey.glb'
-// import ioniq5LimitedBlack from '../assets/models/Ioniq_5_Limited_Black.glb'
-// import ioniq5D100 from '../assets/models/Ioniq_5_D100.glb'
-// import ioniq5SEExterior from '../assets/models/ioniq5_SE_Viewer.glb'
-// import ioniq5LimitedExterior from '../assets/models/ioniq5_Limited_Viewer.glb'
-// import ioniq5D100Exterior from '../assets/models/ioniq5_D100_Viewer.glb'
-
-// // Car Colors
-// import 'abyssBlack' from '../assets/colors/abyss-black.png'
-// import 'atlasWhite' from '../assets/colors/atlas-white.png'
-// import 'cyberGray' from '../assets/colors/cyber-gray.png'
-// import 'digitalTeal' from '../assets/colors/digital-teal.png'
-// import lucidBlue from '../assets/colors/lucid-blue.png'
-// import shootingStarMatte from '../assets/colors/shooting-star-matte.png'
-// import 'gravityGoldMatte' from '../assets/colors/gravity-gold-matte.png'
-// import grayGreen2Tone from '../assets/colors/curated-silver.png'
-// import terraBrown2Tone from '../assets/colors/ultimate-red.png'
-
-// // ionic6 colors
-// import 'onyxBlack' from '../assets/colors/onyx-black.png'
-// import 'digitalGreen' from '../assets/colors/digital-green.png'
-// import 'curatedSilver' from '../assets/colors/curated-silver.png'
-// import 'ultimateRed' from '../assets/colors/ultimate-red.png'
-// import serenityWhite from '../assets/colors/serenity-white.png'
-// import transmissionBlue from '../assets/colors/transmission-blue.png'
-
 const cars = {
     'IONIQ 5': {
         'image': 'ioniq5',
@@ -46,7 +5,7 @@ const cars = {
             'image': 'SE',
             'description': 'The base trim with the most affordable price',
             'exteriorModel': {
-                'model': 'ioniq5_SE_Viewer',
+                'model': 'ioniq5_SE_Exterior',
                 'material': 'SE',
                 'removables': ['Limited', 'D100']
             },
@@ -125,7 +84,7 @@ const cars = {
             'image': 'limited',
             'description': 'The base trim with the most affordable price',
             'exteriorModel': {
-                'model': 'ioniq5_Limited_Viewer',
+                'model': 'ioniq5_Limited_Exterior',
                 'material': 'Limited',
                 'removables': ['SE', 'D100']
             },
@@ -143,7 +102,7 @@ const cars = {
                     'color': '#000000'
                 },
                 'Shooting Star Matte': {
-                    'image': 'shootingStarMatte',
+                    'image': 'shooting-star-matte',
                     'name': 'Shooting Star Matte',
                     'color': '#434449'
                 },
@@ -158,7 +117,7 @@ const cars = {
                     'color': '#1E3639'
                 },
                 'Gravity Gold Matte': {
-                    'image': 'gravityGoldMatte',
+                    'image': 'gravity-gold-matte',
                     'name': 'Gravity Gold Matte',
                     'color': '#A4A3A3'
                 },
@@ -201,7 +160,7 @@ const cars = {
             'image': 'D100PlatinumEdition',
             'description': 'The base trim with the most affordable price',
             'exteriorModel': {
-                'model': 'ioniq5_D100_Viewer',
+                'model': 'ioniq5_D100_Exterior',
                 'material': 'D100',
                 'removables': ['SE', 'Limited']
             },
@@ -213,7 +172,7 @@ const cars = {
             },
             'exteriorColors': {
                 'Gravity Gold Matte': {
-                    'image': 'gravityGoldMatte',
+                    'image': 'gravity-gold-matte',
                     'name': 'Gravity Gold Matte',
                     'color': '#A4A3A3'
                 },
@@ -246,7 +205,7 @@ const cars = {
         'SE': {
             'image': 'SE6',
             'exteriorModel': {
-                'model': 'ioniq5_SE_Viewer',
+                'model': 'ioniq5_SE_Exterior',
                 'material': 'Paint',
             },
             'interiorModel': {
@@ -255,32 +214,32 @@ const cars = {
             },
             'exteriorColors': {
                 'Onyx Black': {
-                    'image': 'onyxBlack',
+                    'image': 'onyx-black',
                     'name': 'Onyx Black',
                     'color': '#000000'
                 },
                 'Digital Green': {
-                    'image': 'digitalGreen',
+                    'image': 'digital-green',
                     'name': 'Digital Green',
                     'color': '#BCBDBE'
                 },
                 'Curated Silver': {
-                    'image': 'curatedSilver',
+                    'image': 'curated-silver',
                     'name': 'Curated Silver',
                     'color': '#707172'
                 },
                 'Ulitmate Red': {
-                    'image': 'ultimateRed',
+                    'image': 'ultimate-red',
                     'name': 'Ulitmate Red',
                     'color': '#1E3639'
                 },
                 'Serenity White': {
-                    'image': 'serenityWhite',
+                    'image': 'serenity-white',
                     'name': 'Serenity White',
                     'color': '#354450'
                 },
                 'Transmission Blue': {
-                    'image': 'transmissionBlue',
+                    'image': 'transmission-blue',
                     'name': 'Transmission Blue',
                     'color': '#354450'
                 },
@@ -296,7 +255,7 @@ const cars = {
         'SEL': {
             'image': 'SEL6',
             'exteriorModel': {
-                'model': 'ioniq5_Limited_Viewer',
+                'model': 'ioniq5_Limited_Exterior',
                 'material': 'Paint',
             },
             'interiorModel': {
@@ -305,37 +264,37 @@ const cars = {
             },
             'exteriorColors': {
                 'Onyx Black': {
-                    'image': 'onyxBlack',
+                    'image': 'onyx-black',
                     'name': 'Onyx Black',
                     'color': '#000000'
                 },
                 'Digital Green': {
-                    'image': 'digitalGreen',
+                    'image': 'digital-green',
                     'name': 'Digital Green',
                     'color': '#BCBDBE'
                 },
                 'Curated Silver': {
-                    'image': 'curatedSilver',
+                    'image': 'curated-silver',
                     'name': 'Curated Silver',
                     'color': '#707172'
                 },
                 'Ulitmate Red': {
-                    'image': 'ultimateRed',
+                    'image': 'ultimate-red',
                     'name': 'Ulitmate Red',
                     'color': '#1E3639'
                 },
                 'Serenity White': {
-                    'image': 'serenityWhite',
+                    'image': 'serenity-white',
                     'name': 'Serenity White',
                     'color': '#354450'
                 },
                 'Transmission Blue': {
-                    'image': 'transmissionBlue',
+                    'image': 'transmission-blue',
                     'name': 'Transmission Blue',
                     'color': '#354450'
                 },
                 'Gravity Gold Matte': {
-                    'image': 'gravityGoldMatte',
+                    'image': 'gravity-gold-matte',
                     'name': 'Gravity Gold Matte',
                     'color': '#A4A3A3'
                 },
@@ -366,37 +325,37 @@ const cars = {
             },
             'exteriorColors': {
                 'Onyx Black': {
-                    'image': 'onyxBlack',
+                    'image': 'onyx-black',
                     'name': 'Onyx Black',
                     'color': '#000000'
                 },
                 'Digital Green': {
-                    'image': 'digitalGreen',
+                    'image': 'digital-green',
                     'name': 'Digital Green',
                     'color': '#BCBDBE'
                 },
                 'Curated Silver': {
-                    'image': 'curatedSilver',
+                    'image': 'curated-silver',
                     'name': 'Curated Silver',
                     'color': '#707172'
                 },
                 'Ulitmate Red': {
-                    'image': 'ultimateRed',
+                    'image': 'ultimate-red',
                     'name': 'Ulitmate Red',
                     'color': '#1E3639'
                 },
                 'Serenity White': {
-                    'image': 'serenityWhite',
+                    'image': 'serenity-white',
                     'name': 'Serenity White',
                     'color': '#354450'
                 },
                 'Transmission Blue': {
-                    'image': 'transmissionBlue',
+                    'image': 'transmission-blue',
                     'name': 'Transmission Blue',
                     'color': '#354450'
                 },
                 'Gravity Gold Matte': {
-                    'image': 'gravityGoldMatte',
+                    'image': 'gravity-gold-matte',
                     'name': 'Gravity Gold Matte',
                     'color': '#A4A3A3'
                 },

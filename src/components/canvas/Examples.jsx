@@ -42,7 +42,7 @@ export const Logo = ({ route = '/trim', ...props }) => {
 }
 
 export function Duck(props) {
-  const { scene } = useGLTF(`/${props.model}.glb`)
+  const { scene } = useGLTF(`/models/${props.model}.glb`)
 
   return <primitive object={scene} {...props} />
 }

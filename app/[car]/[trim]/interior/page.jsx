@@ -39,19 +39,19 @@ export default function Page({ params }) {
         <div className='mt-2 w-11/12 mx-auto relative rounded-xl h-4/5'>
           <View orbit className='h-96 sm:h-48 sm:w-full'>
             <Suspense fallback={null}>
-            <Duck route='/trim' scale={2} position={[0, -1.6, 0]} model={cars['IONIQ 5']['SE'].exteriorModel.model} />
+            <Duck route='/trim' scale={2} position={[0, -1.6, 0]} model={cars[car][trim].exteriorModel.model} />
             <Common color={'gray'} />
             </Suspense>
           </View>
           <div className='absolute bottom-5 z-10'>
             <div className='flex flex-row justify-evenly overflow-x-auto px-2 py-1 rounded-full gap-5 w-11/12 bg-opacity-70 bg-gray-100 mx-auto'>
-            {Object.keys(cars['IONIQ 5']['SE'].exteriorColors).map(color => {
+            {Object.keys(cars[car][trim].interiorColors).map(color => {
               return (
               <img
                 key={color}
                 alt={color}
                 onClick={() => setSelectedColor(color)}
-                src={`/colors/${cars['IONIQ 5']['SE'].exteriorColors[color].image}.png`}
+                src={`/colors/${cars[car][trim].interiorColors[color].image}.png`}
               className={`w-1/12 h-1/12 lg:w-1/12 ${selectedColor === color ? 'border-2 border-white rounded-full' : ''}`}
               />
             )})}

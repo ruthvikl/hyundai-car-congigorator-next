@@ -44,8 +44,7 @@ export default function Page({ params }) {
             {trim === 'image' ? null : (
               <div
                 className='text-black min-w-80 mx-auto py-5 items-center flex flex-col rounded-lg cursor-pointer h-full mt-5
-                  bg-gradient-to-br from-gray-200 to-transparent bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-40'
-              >
+                  bg-gradient-to-br from-gray-200 to-transparent bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-40'>
                 <div className='flex flex-col justify-evenly w-full h-full'>
                   <View orbit className='h-96 sm:h-48 sm:w-full'>
                     <Suspense fallback={null}>

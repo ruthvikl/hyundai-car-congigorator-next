@@ -28,6 +28,7 @@ export default function Page({ params }) {
   const [selectedColor, setSelectedColor] = useState('gray')
   const router = useRouter()
   let { trim, car } = params
+  trim = decodeURIComponent(trim)
   car = decodeURIComponent(car)
   const handleSelectClick = () => {
     router.push(`/${car}/${trim}/interior?color=${selectedColor}`)
@@ -46,19 +47,19 @@ export default function Page({ params }) {
               route='/trim'
               scale={2}
               position={[0, -1.6, 0]}
-              model={cars['IONIQ 5'][trim].exteriorModel.model}
+              model={cars[car][trim].exteriorModel.model}
             />
             <Common color={selectedColor} />
           </Suspense>
         </View>
         <div className='absolute bottom-5 z-10'>
           <div className='flex flex-row justify-evenly overflow-x-auto px-2 py-1 rounded-full gap-5 w-11/12 bg-opacity-70 bg-gray-100 mx-auto'>
-            {Object.keys(cars['IONIQ 5'][trim].exteriorColors).map((color) => (
+            {Object.keys(cars[car][trim].exteriorColors).map((color) => (
               <img
                 key={color}
                 alt={color}
                 onClick={() => setSelectedColor(color)}
-                src={`/colors/${cars['IONIQ 5'][trim].exteriorColors[color].image}.png`}
+                src={`/colors/${cars[car][trim].exteriorColors[color].image}.png`}
                 className={`w-1/12 h-1/12 lg:w-1/12 ${selectedColor === color ? 'border-2 border-white rounded-full' : ''}`}
               />
             ))}
