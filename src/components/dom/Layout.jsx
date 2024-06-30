@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
   const ref = useRef()
 
   return (
-    <div className='relative w-full h-full overflow-hidden'
+    <div className='relative size-full overflow-hidden'
       ref={ref}>
       {children}
       <Scene

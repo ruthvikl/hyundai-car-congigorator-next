@@ -14,7 +14,6 @@ function Environment1({ texture }) {
 }
 
 const Exterior = ({ color }) => {
-  console.log('Exterior', color)
   const texture = useLoader(TextureLoader, '/envmaps/images/Environment-Map-Empty-Warehouse2K.jpg')
 
   return (
@@ -36,7 +35,6 @@ const Exterior = ({ color }) => {
 }
 
 const Interior = ({ color }) => {
-  console.log('Interior', color)
   const texture = useLoader(TextureLoader, '/envmaps/images/Environment-Map-Empty-Warehouse2K.jpg')
 
   return (
@@ -58,7 +56,6 @@ const Interior = ({ color }) => {
 }
 
 const Common = ({ color }) => {
-  console.log('Common')
   const orbitRef = useRef();
 
   useEffect(() => {
