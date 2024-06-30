@@ -1,12 +1,20 @@
 'use client'
 
 import { useGLTF } from '@react-three/drei'
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
-import { useMemo, useRef, useState } from 'react'
+import { useMemo, useRef, useState, Suspense } from 'react'
 import { Line, useCursor, MeshDistortMaterial } from '@react-three/drei'
 import { useRouter } from 'next/navigation'
 import { cars } from '@/data/cars.js'
+
+// Configure DRACOLoader for useGLTF
+useGLTF.preload(`/models/your-model.glb`, loader => {
+  const dracoLoader = new DRACOLoader()
+  dracoLoader.setDecoderPath('/draco/gltf/')
+  loader.setDRACOLoader(dracoLoader)
+})
 
 export const Logo = ({ route = '/trim', ...props }) => {
   const { car } = props
@@ -42,7 +50,14 @@ export const Logo = ({ route = '/trim', ...props }) => {
 }
 
 export function Duck(props) {
-  const { scene } = useGLTF(`/models/${props.model}.glb`)
-
-  return <primitive object={scene} {...props} />
+  const { scene } = useGLTF(`/models/${props.model}.glb`, loader => {
+    const dracoLoader = new DRACOLoader()
+    dracoLoader.setDecoderPath('/draco/gltf/')
+    loader.setDRACOLoader(dracoLoader)
+  })
+  return (
+    <Suspense fallback={null}>
+      <primitive object={scene} {...props} />
+    </Suspense>
+  )
 }
