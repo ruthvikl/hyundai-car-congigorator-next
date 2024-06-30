@@ -1,5 +1,5 @@
 const cars = {
-    'IONIQ 5': {
+    'IONIQ5': {
         'image': 'ioniq5',
         'SE': {
             'image': 'SE',
