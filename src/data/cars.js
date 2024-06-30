@@ -11,7 +11,7 @@ const cars = {
             },
             'interiorModel': {
                 'model': {
-                    'Black': 'ioniq6SeInterior',
+                    'Black': 'Ioniq5_Interior_SE',
                 },
                 'material': 'Leather',
             },
@@ -90,8 +90,8 @@ const cars = {
             },
             'interiorModel': {
                 'model': {
-                    'Black': 'ioniq5LimitedBlack',
-                    'Gray Green 2 Tone': 'ioniq5LimitedGreyGreen'
+                    'Black': 'Ioniq_5_Interior_Limited_Black',
+                    'Gray Green 2 Tone': 'Ioniq_5_Interior_Limited_Grey_Green'
                 },
                 'material': 'Leather',
             },
@@ -136,7 +136,7 @@ const cars = {
                 'Black': {
                     'image': 'abyss-black',
                     'name': 'Black',
-                    'color': '#000000'
+                    'color': '#ffffff'
                 },
                 'Gray Green 2 Tone': {
                     'image': 'abyss-black',
@@ -166,7 +166,7 @@ const cars = {
             },
             'interiorModel': {
                 'model': {
-                    'Terra Brown 2 Tone': 'ioniq5D100',
+                    'Terra Brown 2 Tone': 'Ioniq_5_Interior_D100',
                 },
                 'material': 'Leather',
             },

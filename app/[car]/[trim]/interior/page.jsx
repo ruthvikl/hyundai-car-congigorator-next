@@ -51,7 +51,7 @@ export default function Page({ params }) {
               route='/trim'
               scale={2}
               position={[0, -1.6, 0]}
-              model={cars[car][trim].exteriorModel.model}
+              model={cars[car][trim].interiorModel.model[selectedColor]}
             />
             <Common color={cars[car][trim].interiorColors[selectedColor].color} />
           </Suspense>
