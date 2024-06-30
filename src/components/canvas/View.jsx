@@ -10,13 +10,13 @@ function Environment1({ texture }) {
   const { scene } = useThree()
   texture.mapping = EquirectangularReflectionMapping
   scene.background = texture
-
   return null
 }
 
-export const Common = ({ color }) => {
+const Common = ({ color }) => {
   console.log('Common', color)
   const texture = useLoader(TextureLoader, '/envmaps/images/Environment-Map-Empty-Warehouse2K.jpg')
+
   return (
     <Suspense fallback={null}>
       {color && <color attach='background' args={[color]} />}
@@ -25,8 +25,8 @@ export const Common = ({ color }) => {
       <PerspectiveCamera makeDefault fov={60} position={[-6, 0, 6]} />
       <OrbitControls
         enableZoom={false}
-        minPolarAngle={Math.PI / 5}  // Set minimum polar angle
-        maxPolarAngle={Math.PI / 2.5}  // Set maximum polar angle
+        minPolarAngle={Math.PI / 5}
+        maxPolarAngle={Math.PI / 2.5}
         target={[0, 0, 0]}
       />
       <Environment1 texture={texture} />
@@ -53,4 +53,4 @@ const View = forwardRef(({ children, orbit, ...props }, ref) => {
 })
 View.displayName = 'View'
 
-export { View }
+export { Common, View }

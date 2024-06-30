@@ -2,31 +2,26 @@
 
 import { useGLTF } from '@react-three/drei'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
-import { useFrame } from '@react-three/fiber'
-import * as THREE from 'three'
-import { useMemo, useRef, useState, Suspense } from 'react'
-import { Line, useCursor, MeshDistortMaterial } from '@react-three/drei'
 import { useRouter } from 'next/navigation'
+import { Suspense } from 'react'
 import { cars } from '@/data/cars.js'
 
 // Configure DRACOLoader for useGLTF
-useGLTF.preload(`/models/your-model.glb`, loader => {
+const configureDRACOLoader = loader => {
   const dracoLoader = new DRACOLoader()
   dracoLoader.setDecoderPath('/draco/gltf/')
   loader.setDRACOLoader(dracoLoader)
-})
+}
 
-export const Logo = ({ route = '/trim', ...props }) => {
-  const { car } = props
+export const Logo = ({ route = '/trim', car, ...props }) => {
   const router = useRouter()
 
   return (
-    <div onClick={
-      () => {
-        // Send Car details to the console and push the data to the route
-        console.log(car)
-        router.push(`/${car}/`)
-      }}
+    <div onClick={() => {
+      // Send Car details to the console and push the data to the route
+      console.log(car)
+      router.push(`/${car}/`)
+    }}
       key={car}
       className='text-black w-10/12 mx-auto items-center flex rounded-lg cursor-pointer mb-5
           bg-gradient-to-br from-gray-200 to-[#dfdfdf] bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-40 drop-shadow shadow-lg shadow-white'
@@ -49,12 +44,8 @@ export const Logo = ({ route = '/trim', ...props }) => {
   )
 }
 
-export function Duck(props) {
-  const { scene } = useGLTF(`/models/${props.model}.glb`, loader => {
-    const dracoLoader = new DRACOLoader()
-    dracoLoader.setDecoderPath('/draco/gltf/')
-    loader.setDRACOLoader(dracoLoader)
-  })
+export function Duck({ model, ...props }) {
+  const { scene } = useGLTF(`/models/${model}.glb`, configureDRACOLoader)
   return (
     <Suspense fallback={null}>
       <primitive object={scene} {...props} />
