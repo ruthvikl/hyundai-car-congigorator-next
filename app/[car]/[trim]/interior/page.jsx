@@ -1,6 +1,7 @@
 'use client'
 
 import { Duck } from '@/components/canvas/Examples'
+import { useRouter, useSearchParams } from 'next/navigation'
 import dynamic from 'next/dynamic'
 import { Suspense, useState } from 'react'
 import { cars } from '@/data/cars'
@@ -23,14 +24,18 @@ const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.
 })
 const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Common), { ssr: false })
 
-export default function Page() {
+export default function Page({ params }) {
+  const searchParams = useSearchParams()
+  const exteriorColor = searchParams.get('color') || 'defaultColor'
+  console.log(exteriorColor)
+  let { trim, car } = params
+  car = decodeURIComponent(car)
   const [selectedColor, setSelectedColor] = useState('gray');
   return (
     <div className='flex flex-col gap-2 mx-auto w-full h-screen'>
         <img src='/logo.png' alt='logo' className='w-2/12 mt-5 mx-auto' />
-        <h1 className='text-3xl text-center'>IONIQ 5</h1>
-        <p className='text-center text-lg'>SE</p>
-        <p className='text-center text-lg'>Customise your vehicle</p>
+        <h1 className='text-3xl text-center'>{car}</h1>
+        <p className='text-center text-lg'>{trim}</p>
         <div className='mt-2 w-11/12 mx-auto relative rounded-xl h-4/5'>
             <View orbit className='h-96 sm:h-48 sm:w-full'>
                 <Suspense fallback={null}>

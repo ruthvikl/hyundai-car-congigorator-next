@@ -9,15 +9,7 @@ const Layout = ({ children }) => {
 
   return (
     <div
-      ref={ref}
-      style={{
-        position: 'relative',
-        width: ' 100%',
-        height: '100%',
-        overflow: 'auto',
-        touchAction: 'auto',
-      }}
-    >
+      ref={ref}>
       {children}
       <Scene
         style={{

@@ -33,7 +33,7 @@ export const Logo = ({ route = '/trim', ...props }) => {
       () => {
         // Send Car details to the console and push the data to the route
         console.log(car)
-        router.push(route + `?car=${car}`)
+        router.push(`/${car}/`)
       }}
       key={car}
       className='text-black w-10/12 mx-auto mb-5 items-center flex rounded-lg cursor-pointer mt-10 
@@ -58,7 +58,6 @@ export const Logo = ({ route = '/trim', ...props }) => {
 }
 
 export function Duck(props) {
-  console.log(props)
   const { scene } = useGLTF(`/${props.model}.glb`)
 
   return <primitive object={scene} {...props} />
