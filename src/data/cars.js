@@ -146,7 +146,7 @@ const cars = {
             },
             "hotspots": {
                 "exterior": {
-                    "Blind Spot View Monitor ": {
+                    "Blind Spot View Monitor": {
                         "description": "When you signal to change lanes, a live camera feed of the lane will appear on the digital instrument gauge display",
                     },
                     "Ultra-fast charging": {

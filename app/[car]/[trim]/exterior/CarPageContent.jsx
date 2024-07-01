@@ -8,6 +8,9 @@ import { cars } from '@/data/cars'
 import { Hotspot } from '@/components/canvas/Hotspot'
 import { Modal } from '@/components/modal'
 import NebulaComponent from '@/components/Three/Nebula'
+import { useLoader } from '@react-three/fiber'
+import Cone from '@/components/Three/Cone'
+import { DoubleSide, NormalBlending, TextureLoader } from 'three'
 
 const Trim = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.trim), { ssr: false })
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
@@ -28,6 +31,22 @@ const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.
 
 const Exterior = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Exterior), { ssr: false })
 
+const ImagePlane = ({ imageUrl, position, rotation, scale, visible }) => {
+  const texture = useLoader(TextureLoader, imageUrl);
+  return (
+    <mesh position={position} rotation={rotation} scale={scale}>
+      <planeGeometry attach="geometry" args={[5, 5]} />
+      <meshStandardMaterial
+        attach="material"
+        map={texture}
+        transparent={true}
+        blending={NormalBlending}
+        visible={visible}
+      />
+    </mesh>
+  );
+};
+
 export default function Page({ car, trim }) {
   const router = useRouter()
   const [selectedColor, setSelectedColor] = useState(Object.keys(cars[car][trim].exteriorColors)[0])
@@ -35,6 +54,7 @@ export default function Page({ car, trim }) {
   const [hotspotTitle, setHotspotTitle] = useState('')
   const [hotspotDescription, setHotspotDescription] = useState('')
   const [showNebula, setShowNebula] = useState(false);
+  const [showCone, setShowCone] = useState(false); // Add state for cone visibility
 
   const handleSelectClick = () => {
     router.push(`/${car}/${trim}/interior?exteriorColor=${selectedColor}`)
@@ -45,10 +65,10 @@ export default function Page({ car, trim }) {
   }
 
   const handleHotspotHeadLight = () => {
-    if((trim === 'Limited' || trim === 'D100 Platinum Edition') && car === 'IONIQ5'){
+    if ((trim === 'Limited' || trim === 'D100 Platinum Edition') && car === 'IONIQ5') {
       setHotspotTitle('Premium front LED accent lighting"')
       setHotspotDescription(cars[car][trim].hotspots.exterior['Premium front LED accent lighting'].description)
-    }else {
+    } else {
       setHotspotTitle('LED Projector headlights')
       setHotspotDescription(cars[car][trim].hotspots.exterior['LED Projector headlights'].description)
     }
@@ -71,6 +91,7 @@ export default function Page({ car, trim }) {
     setHotspotTitle('Blind Spot View Monitor')
     setHotspotDescription(cars[car][trim].hotspots.exterior['Blind Spot View Monitor'].description)
     showHotspot ? setShowHotspot(false) : setShowHotspot(true)
+    setShowCone(true)
   };
 
   return (
@@ -106,16 +127,16 @@ export default function Page({ car, trim }) {
                   rotation={[0, 11, 0]}
                   scale={[2, 2, 2]}
                   onClick={handleHotspotMirror}
-                  cameraTarget={[50, 15, -10]} // Example target position
+                  cameraTarget={[50, 15, -20]} // Example target position
                 />
-                {/* <Cone position={[3, 0, -5]} rotation={[1.6, 0, 0.6]} scale={[2, 6, 2]} visible={showCone} />
+                <Cone position={[4, 0, -1]} rotation={[1.5, 0, 1.1]} scale={[4.5, 9, 4.5]} visible={showCone} />
                 <ImagePlane
                   imageUrl="/Blind_Spot_image.png"
-                  position={[6.5, 0.05, -9.95]}
-                  rotation={[0, 2.55, 0]}
-                  scale={[0.85, 0.85, 0.85]}
+                  position={[15, 0.05, -6]}
+                  rotation={[0, 1.4, 0]}
+                  scale={[1.8, 1.8, 1.8]}
                   visible={showCone}
-                /> */}
+                />
               </group>
               {showNebula && <NebulaComponent />}
             </group>
@@ -125,7 +146,7 @@ export default function Page({ car, trim }) {
         <div className='relative bottom-11 z-10'>
           <div className='flex flex-row justify-evenly overflow-x-auto px-2 py-1 rounded-full gap-5 w-11/12 bg-gray-100/70 mx-auto'>
             {Object.keys(cars[car][trim].exteriorColors).map((color) => (
-              <img 
+              <img
                 key={color}
                 alt={color}
                 onClick={() => setSelectedColor(color)}
