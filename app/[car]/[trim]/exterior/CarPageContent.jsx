@@ -45,7 +45,7 @@ export default function Page({ car, trim }) {
   }
 
   const handleHotspotHeadLight = () => {
-    if((trim === 'Limited' || trim === 'D100 Platinum Edition') && car === 'SE'){
+    if((trim === 'Limited' || trim === 'D100 Platinum Edition') && car === 'IONIQ5'){
       setHotspotTitle('Premium front LED accent lighting"')
       setHotspotDescription(cars[car][trim].hotspots.exterior['Premium front LED accent lighting'].description)
     }else {
