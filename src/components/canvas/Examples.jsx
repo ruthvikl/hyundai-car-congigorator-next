@@ -108,8 +108,6 @@ export function Duck({ model, playOpenAnimation, ...props }) {
     const action = actionsRef.current[clipName]
     if (action) {
       action.reset().play()
-    } else {
-      console.warn(`Animation ${clipName} not found`)
     }
   }
 
