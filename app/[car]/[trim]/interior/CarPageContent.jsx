@@ -35,6 +35,8 @@ export default function CarPageContent({ car, trim }) {
   const [selectedColor, setSelectedColor] = useState(Object.keys(cars[car][trim].interiorColors)[0])
   const [playOpenAnimation, setPlayOpenAnimation] = useState(false)
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const [showAmbient, setShowAmbient] = useState(false)
+  const [selectedAmbientColor, setSelectedAmbientColor] = useState('#000')
   const [showHotspot, setShowHotspot] = useState(false)
   const [hotspotTitle, setHotspotTitle] = useState('')
   const [hotspotDescription, setHotspotDescription] = useState('')
@@ -110,7 +112,7 @@ export default function CarPageContent({ car, trim }) {
             <Interior color={cars[car][trim].interiorColors[selectedColor].color} />
           </Suspense>
         </View>
-        <div className='relative bottom-11 z-10'>
+        <div className={`relative  z-10 ${showAmbient ? 'bottom-20 flex flex-col gap-2' : 'bottom-11'}`}>
           <div className='flex flex-row justify-evenly overflow-x-auto px-2 py-1 rounded-full gap-5 w-11/12 bg-gray-100/70 mx-auto'>
             {Object.keys(cars[car][trim].interiorColors).map((color) => (
               <img
@@ -122,6 +124,16 @@ export default function CarPageContent({ car, trim }) {
               />
             ))}
           </div>
+          { showAmbient && trim !== 'SE' &&
+            <div className='flex flex-row justify-evenly overflow-x-auto px-2 py-1 rounded-full gap-5 w-11/12 bg-gray-100/70 mx-auto'>
+              <div className={`size-4 bg-[#000] rounded-full ${selectedAmbientColor === '#000' ? 'border-2 border-white' : ''}`} onClick={() => setSelectedAmbientColor('#000')}>
+              </div>
+              <div className={`size-4 bg-[#FFA500] rounded-full ${selectedAmbientColor === '#FFA500' ? 'border-2 border-white' : ''}`} onClick={() => setSelectedAmbientColor('#FFA500')}>
+              </div>
+              <div className={`size-4 bg-[#BACE59] rounded-full ${selectedAmbientColor === '#BACE59' ? 'border-2 border-white' : ''}`} onClick={() => setSelectedAmbientColor('#BACE59')}>
+              </div>
+            </div>
+          }
         </div>
       </div>
       <div
