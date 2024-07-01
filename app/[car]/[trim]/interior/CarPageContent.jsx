@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import dynamic from 'next/dynamic'
 import { Suspense, useState } from 'react'
 import { cars } from '@/data/cars'
+import { Hotspot } from '@/components/canvas/Hotspot'
 
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
@@ -29,6 +30,7 @@ export default function CarPageContent({ car, trim }) {
   trim = decodeURIComponent(trim)
   car = decodeURIComponent(car)
   const [selectedColor, setSelectedColor] = useState(Object.keys(cars[car][trim].interiorColors)[0])
+  const [playOpenAnimation, setPlayOpenAnimation] = useState(false)
 
   const router = useRouter()
   const handleSelectClick = () => {
@@ -39,6 +41,13 @@ export default function CarPageContent({ car, trim }) {
   const handleBackClick = () => {
     router.push(`/${car}/${trim}/exterior`)
   }
+
+  const handleHotspotVisionRoof = () => {
+    console.log('vision roof clicked')
+    setPlayOpenAnimation(true)
+  }
+
+
   return (
     <div>
       <h1 className='text-3xl text-center'>{car}</h1>
@@ -46,12 +55,22 @@ export default function CarPageContent({ car, trim }) {
       <div className='mt-2 w-11/12 mx-auto relative rounded-xl'>
         <View orbit className='h-96 sm:h-48 sm:w-full'>
           <Suspense fallback={null}>
-            <Duck
-              route='/trim'
-              scale={12}
-              position={[4, 3, 0]}
-              model={cars[car][trim].interiorModel.model[selectedColor]}
-            />
+            <group position={[0, -2, 0]}>
+              <Duck
+                route='/trim'
+                scale={12}
+                model={cars[car][trim].interiorModel.model[selectedColor]}
+                playOpenAnimation={playOpenAnimation}
+              />
+              <Hotspot
+                position={[6, 7, 0]}
+                rotation={[0, 11, 0]}
+                scale={[1, 1, 1]}
+                onClick={handleHotspotVisionRoof}
+                cameraTarget={[-13, -1, 0]} // Example target position
+              />
+            </group>
+
             <Interior color={cars[car][trim].interiorColors[selectedColor].color} />
           </Suspense>
         </View>

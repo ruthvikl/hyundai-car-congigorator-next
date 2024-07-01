@@ -40,14 +40,14 @@ const Interior = ({ color }) => {
   return (
     <Suspense fallback={null}>
       {color && <color attach='background' args={[color]} />}
-      <directionalLight intensity={6} color='white' position={[4, 5, 2]} />
+      <directionalLight intensity={5} color='white' position={[0, 5, 0]} />
       <ambientLight intensity={2} />
-      <PerspectiveCamera makeDefault fov={60} position={[1, 2, 0]} />
+      <PerspectiveCamera makeDefault fov={60} position={[1, 0, 0]} />
       <OrbitControls
-        enableZoom={false}
-        minPolarAngle={Math.PI / 5}
-        maxPolarAngle={Math.PI / 2.5}
-        target={[0, 5, 0]}
+        enableZoom={true}
+        minPolarAngle={Math.PI / 10}
+        maxPolarAngle={Math.PI / 1.9}
+        target={[0, 0.5, 0]}
       />
       <Environment1 texture={texture} />
       <Environment files="/envmaps/hdr/Environment-Map-Empty-Warehouse2K.hdr" ground={{ height: 10, radius: 100, scale: 200 }} />
@@ -93,7 +93,7 @@ const View = forwardRef(({ children, orbit, ...props }, ref) => {
       <Three>
         <ViewImpl track={localRef}>
           {children}
-          {orbit && <OrbitControls />}
+          {orbit}
         </ViewImpl>
       </Three>
     </>

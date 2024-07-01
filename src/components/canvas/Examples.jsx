@@ -3,8 +3,10 @@
 import { useGLTF } from '@react-three/drei'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
 import { useRouter } from 'next/navigation'
-import { Suspense } from 'react'
+import { Suspense, useRef, useEffect, useState } from 'react'
+import { useThree, useFrame } from '@react-three/fiber'
 import { cars } from '@/data/cars.js'
+import * as THREE from 'three'
 
 // Configure DRACOLoader for useGLTF
 const configureDRACOLoader = loader => {
@@ -42,8 +44,75 @@ export const Logo = ({ route = '/trim', car, ...props }) => {
   )
 }
 
-export function Duck({ model, ...props }) {
+export function Duck({ model, playOpenAnimation, ...props }) {
   const { scene } = useGLTF(`/models/${model}.glb`, configureDRACOLoader)
+  const { animations } = useGLTF(`/models/${model}.glb`)
+  const mixerRef = useRef()
+  const [isOpen, setIsOpen] = useState(false)
+  const actionsRef = useRef({})
+
+  useEffect(() => {
+    if (scene) {
+      const mixer = new THREE.AnimationMixer(scene)
+      mixerRef.current = mixer
+
+      // Initialize actions
+      animations.forEach(clip => {
+        const action = mixer.clipAction(clip)
+        action.clampWhenFinished = true
+        action.setLoop(THREE.LoopOnce)
+        actionsRef.current[clip.name] = action
+      })
+
+      // Play initial close animations
+      playCloseAnimations()
+    }
+  }, [scene, animations])
+
+  useEffect(() => {
+    if (playOpenAnimation !== isOpen) {
+      if (playOpenAnimation) {
+        playOpenAnimations()
+      } else {
+        playCloseAnimations()
+      }
+      setIsOpen(playOpenAnimation)
+    }
+  }, [playOpenAnimation])
+
+  useFrame((state, delta) => {
+    if (mixerRef.current) {
+      mixerRef.current.update(delta)
+    }
+  })
+
+  const playCloseAnimations = () => {
+    stopAllAnimations()
+    playAnimation('Back_close')
+    playAnimation('Front_close')
+  }
+
+  const playOpenAnimations = () => {
+    stopAllAnimations()
+    playAnimation('Back_open')
+    playAnimation('Front_open')
+  }
+
+  const stopAllAnimations = () => {
+    Object.values(actionsRef.current).forEach(action => {
+      action.stop()
+    })
+  }
+
+  const playAnimation = (clipName) => {
+    const action = actionsRef.current[clipName]
+    if (action) {
+      action.reset().play()
+    } else {
+      console.warn(`Animation ${clipName} not found`)
+    }
+  }
+
   return (
     <Suspense fallback={null}>
       <primitive object={scene} {...props} />

@@ -13,16 +13,16 @@ export const Hotspot = ({ position, rotation, scale, onClick, visible, cameraTar
     const [shouldReturn, setShouldReturn] = useState(false); // State to handle return animation
     const initialCameraPositionRef = useRef(camera.position.clone()); // Store initial camera position
 
-    useEffect(() => {
-        let timer;
-        if (isHotspotClicked) {
-            timer = setTimeout(() => {
-                setShouldReturn(true); // Trigger return animation after 5 seconds
-            }, 5000);
-        }
+    // useEffect(() => {
+    //     let timer;
+    //     if (isHotspotClicked) {
+    //         timer = setTimeout(() => {
+    //             setShouldReturn(true); // Trigger return animation after 5 seconds
+    //         }, 10000);
+    //     }
 
-        return () => clearTimeout(timer); // Clean up the timer on unmount
-    }, [isHotspotClicked]);
+    //     return () => clearTimeout(timer); // Clean up the timer on unmount
+    // }, [isHotspotClicked]);
 
     useFrame((state, delta) => {
         if (hotspotRef.current) {
