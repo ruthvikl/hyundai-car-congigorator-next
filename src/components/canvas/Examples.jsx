@@ -70,6 +70,11 @@ export function ExteriorModel({ model, color, ...props }) {
                 roughness: 0.15,
               })
             }
+            if (child.name.includes('LED')) {
+              child.material.color = new THREE.Color('#9D9C9F')
+              child.material.emissive = new THREE.Color('#9D9C9F')
+              child.material.emissiveIntensity = 10;
+            }
           }
         })
       }
@@ -84,12 +89,25 @@ export function ExteriorModel({ model, color, ...props }) {
   )
 }
 
-export function InteriorModel({ model, playOpenAnimation, ...props }) {
+export function InteriorModel({ model, playOpenAnimation, color, ...props }) {
   const { scene } = useGLTF(`/models/${model}.glb`, configureDRACOLoader)
   const { animations } = useGLTF(`/models/${model}.glb`)
   const mixerRef = useRef()
   const [isOpen, setIsOpen] = useState(false)
   const actionsRef = useRef({})
+
+  if (color) {
+    scene.traverse((child) => {
+      if (child.isMesh) {
+        if (child.name.includes('Ambient')) {
+          console.log(child.name, color)
+          child.material.color = color
+          child.material.emissive = color
+          child.material.emissiveIntensity = 7;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+        }
+      }
+    })
+  }
 
   useEffect(() => {
     if (scene) {

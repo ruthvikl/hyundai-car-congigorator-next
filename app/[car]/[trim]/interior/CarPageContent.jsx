@@ -9,7 +9,6 @@ import { Hotspot } from '@/components/canvas/Hotspot'
 import { Modal } from '@/components/modal'
 
 // files
-
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
   loading: () => (
@@ -35,8 +34,8 @@ export default function CarPageContent({ car, trim }) {
   const [selectedColor, setSelectedColor] = useState(Object.keys(cars[car][trim].interiorColors)[0])
   const [playOpenAnimation, setPlayOpenAnimation] = useState(false)
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-  const [showAmbient, setShowAmbient] = useState(false)
-  const [selectedAmbientColor, setSelectedAmbientColor] = useState('#000')
+  const [showAmbient, setShowAmbient] = useState(true)
+  const [selectedAmbientColor, setSelectedAmbientColor] = useState('#4c66f7')
   const [showHotspot, setShowHotspot] = useState(false)
   const [hotspotTitle, setHotspotTitle] = useState('')
   const [hotspotDescription, setHotspotDescription] = useState('')
@@ -87,6 +86,7 @@ export default function CarPageContent({ car, trim }) {
             <group position={[0, -2, 0]}>
               <InteriorModel
                 scale={12}
+                color={selectedAmbientColor}
                 model={cars[car][trim].interiorModel.model[selectedColor]}
                 playOpenAnimation={playOpenAnimation}
               />
@@ -127,11 +127,11 @@ export default function CarPageContent({ car, trim }) {
           </div>
           { showAmbient && trim !== 'SE' &&
             <div className='flex flex-row justify-evenly overflow-x-auto px-2 py-1 rounded-full gap-5 w-11/12 bg-gray-100/70 mx-auto'>
-              <div className={`size-4 bg-[#000] rounded-full ${selectedAmbientColor === '#000' ? 'border-2 border-white' : ''}`} onClick={() => setSelectedAmbientColor('#000')}>
+              <div className={`size-4 bg-[#4c66f7] rounded-full ${selectedAmbientColor === '#4c66f7' ? 'border-2 border-white' : ''}`} onClick={() => setSelectedAmbientColor('#4c66f7')}>
               </div>
-              <div className={`size-4 bg-[#FFA500] rounded-full ${selectedAmbientColor === '#FFA500' ? 'border-2 border-white' : ''}`} onClick={() => setSelectedAmbientColor('#FFA500')}>
+              <div className={`size-4 bg-[#fb7758] rounded-full ${selectedAmbientColor === '#fb7758' ? 'border-2 border-white' : ''}`} onClick={() => setSelectedAmbientColor('#fb7758')}>
               </div>
-              <div className={`size-4 bg-[#BACE59] rounded-full ${selectedAmbientColor === '#BACE59' ? 'border-2 border-white' : ''}`} onClick={() => setSelectedAmbientColor('#BACE59')}>
+              <div className={`size-4 bg-[#daf25b] rounded-full ${selectedAmbientColor === '#daf25b' ? 'border-2 border-white' : ''}`} onClick={() => setSelectedAmbientColor('#daf25b')}>
               </div>
             </div>
           }

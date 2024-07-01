@@ -11,6 +11,8 @@ import NebulaComponent from '@/components/Three/Nebula'
 import { useLoader } from '@react-three/fiber'
 import Cone from '@/components/Three/Cone'
 import { DoubleSide, NormalBlending, TextureLoader } from 'three'
+import { EffectComposer, Bloom, BrightnessContrast, HueSaturation, ToneMapping } from '@react-three/postprocessing'
+import { ToneMappingMode } from 'postprocessing'
 
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
@@ -108,15 +110,25 @@ export default function Page({ car, trim }) {
                 model={cars[car][trim].exteriorModel.model}
                 color={cars[car][trim].exteriorColors[selectedColor].color}
               />
-              <Hotspot
-                position={[-29, 5, 7]}
-                rotation={[0, 15, 0]}
-                scale={[2, 2, 2]}
-                visible={!showHotspot}
-                onClick={handleHotspotHeadLight}
-                cameraTarget={[-45, 10, 10]}
-                isHotspotClicked={showHotspot}
-              />
+              <group position={[-29, 5, 7]}>
+                <Hotspot
+                  rotation={[0, 15, 0]}
+                  scale={[2, 2, 2]}
+                  visible={!showHotspot}
+                  onClick={handleHotspotHeadLight}
+                  cameraTarget={[-45, 10, 10]}
+                  isHotspotClicked={showHotspot}
+                />
+                {(trim === 'Limited' || trim === 'D100 Platinum Edition') && car === 'IONIQ5' && (
+                  <ImagePlane
+                    imageUrl="/Premium_LED_Image.png"
+                    position={[0, 4, 0]}
+                    rotation={[0, -1.3, 0]}
+                    scale={[1, 1, 1]}
+                    visible={showHotspot}
+                  />
+                )}
+              </group>
               <Hotspot
                 position={[21.5, 8, -11]}
                 rotation={[0, 11, 0]}
@@ -143,6 +155,12 @@ export default function Page({ car, trim }) {
                     scale={[1.8, 1.8, 1.8]}
                     visible={showCone}
                   />
+                  <EffectComposer disableNormalPass>
+                    <Bloom mipmapBlur luminanceThreshold={1} intensity={0.7} />
+                    <BrightnessContrast brightness={0} contrast={0.1} />
+                    <HueSaturation hue={0} saturation={0} />
+                    <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
+                  </EffectComposer>
                 </group>
               )}
               {showNebula && <NebulaComponent />}
