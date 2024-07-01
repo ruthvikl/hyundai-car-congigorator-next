@@ -43,7 +43,48 @@ export const Logo = ({ route = '/trim', car, ...props }) => {
     </div>
   )
 }
-export function ExteriorModel({ model, playOpenAnimation, color, ...props }) {
+
+export function TrimsModel({ model, ...props }) {
+  const { scene } = useGLTF(`/models/${model}.glb`, configureDRACOLoader)
+
+  return (
+    <Suspense fallback={null}>
+      <primitive object={scene} {...props} />
+    </Suspense>
+  )
+}
+
+export function ExteriorModel({ model, color, ...props }) {
+  const { scene } = useGLTF(`/models/${model}.glb`, configureDRACOLoader)
+
+  useEffect(() => {
+    if (scene) {
+      // Apply color to all meshes
+      if (color) {
+        scene.traverse((child) => {
+          if (child.isMesh) {
+            if ((child.name.includes('Paint') || child.name === 'Roof_SE' || child.name === 'Left_Mirror' || child.name === 'Right_Mirror' || child.name === 'Right_Mirrorless_Panel' || child.name === 'Left_Mirrorless_Panel')) {
+              child.material = new THREE.MeshStandardMaterial({
+                color,
+                metalness: 0.3,
+                roughness: 0.15,
+              })
+            }
+          }
+        })
+      }
+    }
+  }, [scene, color])
+
+
+  return (
+    <Suspense fallback={null}>
+      <primitive object={scene} {...props} />
+    </Suspense>
+  )
+}
+
+export function InteriorModel({ model, playOpenAnimation, ...props }) {
   const { scene } = useGLTF(`/models/${model}.glb`, configureDRACOLoader)
   const { animations } = useGLTF(`/models/${model}.glb`)
   const mixerRef = useRef()
@@ -65,23 +106,8 @@ export function ExteriorModel({ model, playOpenAnimation, color, ...props }) {
 
       // Play initial close animations
       playCloseAnimations()
-
-      // Apply color to all meshes
-      if (color) {
-        scene.traverse((child) => {
-          if (child.isMesh) {
-            if ((child.name.includes('Paint') || child.name === 'Roof_SE' || child.name === 'Left_Mirror' || child.name === 'Right_Mirror' || child.name === 'Right_Mirrorless_Panel' || child.name === 'Left_Mirrorless_Panel')) {
-              child.material = new THREE.MeshStandardMaterial({
-                color,
-                metalness: 0.3,
-                roughness: 0.15,
-              })
-            }
-          }
-        })
-      }
     }
-  }, [scene, animations, color])
+  }, [scene, animations])
 
   useEffect(() => {
     if (playOpenAnimation !== isOpen) {
@@ -132,265 +158,25 @@ export function ExteriorModel({ model, playOpenAnimation, color, ...props }) {
   )
 }
 
-export function InteriorModel({ model, playOpenAnimation, color, ...props }) {
+export function SummaryModel({ model, color, ...props }) {
   const { scene } = useGLTF(`/models/${model}.glb`, configureDRACOLoader)
-  const { animations } = useGLTF(`/models/${model}.glb`)
-  const mixerRef = useRef()
-  const [isOpen, setIsOpen] = useState(false)
-  const actionsRef = useRef({})
 
   useEffect(() => {
     if (scene) {
-      const mixer = new THREE.AnimationMixer(scene)
-      mixerRef.current = mixer
-
-      // Initialize actions
-      animations.forEach(clip => {
-        const action = mixer.clipAction(clip)
-        action.clampWhenFinished = true
-        action.setLoop(THREE.LoopOnce)
-        actionsRef.current[clip.name] = action
-      })
-
-      // Play initial close animations
-      playCloseAnimations()
-
       // Apply color to all meshes
-      if (color) {
-        scene.traverse((child) => {
-          if (child.isMesh) {
-            if ((child.name.includes('Paint') || child.name === 'Roof_SE' || child.name === 'Left_Mirror' || child.name === 'Right_Mirror' || child.name === 'Right_Mirrorless_Panel' || child.name === 'Left_Mirrorless_Panel')) {
-              child.material = new THREE.MeshStandardMaterial({
-                color,
-                metalness: 0.3,
-                roughness: 0.15,
-              })
-            }
+      scene.traverse((child) => {
+        if (child.isMesh) {
+          if ((child.name.includes('Paint') || child.name === 'Roof_SE' || child.name === 'Left_Mirror' || child.name === 'Right_Mirror' || child.name === 'Right_Mirrorless_Panel' || child.name === 'Left_Mirrorless_Panel')) {
+            child.material = new THREE.MeshStandardMaterial({
+              color,
+              metalness: 0.3,
+              roughness: 0.15,
+            })
           }
-        })
-      }
-    }
-  }, [scene, animations, color])
-
-  useEffect(() => {
-    if (playOpenAnimation !== isOpen) {
-      if (playOpenAnimation) {
-        playOpenAnimations()
-      } else {
-        playCloseAnimations()
-      }
-      setIsOpen(playOpenAnimation)
-    }
-  }, [playOpenAnimation])
-
-  useFrame((state, delta) => {
-    if (mixerRef.current) {
-      mixerRef.current.update(delta)
-    }
-  })
-
-  const playCloseAnimations = () => {
-    stopAllAnimations()
-    playAnimation('Back_close')
-    playAnimation('Front_close')
-  }
-
-  const playOpenAnimations = () => {
-    stopAllAnimations()
-    playAnimation('Back_open')
-    playAnimation('Front_open')
-  }
-
-  const stopAllAnimations = () => {
-    Object.values(actionsRef.current).forEach(action => {
-      action.stop()
-    })
-  }
-
-  const playAnimation = (clipName) => {
-    const action = actionsRef.current[clipName]
-    if (action) {
-      action.reset().play()
-    }
-  }
-
-  return (
-    <Suspense fallback={null}>
-      <primitive object={scene} {...props} />
-    </Suspense>
-  )
-}
-
-export function TrimsModel({ model, playOpenAnimation, color, ...props }) {
-  const { scene } = useGLTF(`/models/${model}.glb`, configureDRACOLoader)
-  const { animations } = useGLTF(`/models/${model}.glb`)
-  const mixerRef = useRef()
-  const [isOpen, setIsOpen] = useState(false)
-  const actionsRef = useRef({})
-
-  useEffect(() => {
-    if (scene) {
-      const mixer = new THREE.AnimationMixer(scene)
-      mixerRef.current = mixer
-
-      // Initialize actions
-      animations.forEach(clip => {
-        const action = mixer.clipAction(clip)
-        action.clampWhenFinished = true
-        action.setLoop(THREE.LoopOnce)
-        actionsRef.current[clip.name] = action
+        }
       })
-
-      // Play initial close animations
-      playCloseAnimations()
-
-      // Apply color to all meshes
-      if(color){
-        scene.traverse((child) => {
-          if (child.isMesh) {
-            if ((child.name.includes('Paint') || child.name === 'Roof_SE' || child.name === 'Left_Mirror' || child.name === 'Right_Mirror' || child.name === 'Right_Mirrorless_Panel' || child.name === 'Left_Mirrorless_Panel')) {
-              child.material = new THREE.MeshStandardMaterial({
-                color,
-                metalness: 0.3,
-                roughness: 0.15,
-              })
-            }
-          }
-        })
-      }
     }
-  }, [scene, animations, color])
-
-  useEffect(() => {
-    if (playOpenAnimation !== isOpen) {
-      if (playOpenAnimation) {
-        playOpenAnimations()
-      } else {
-        playCloseAnimations()
-      }
-      setIsOpen(playOpenAnimation)
-    }
-  }, [playOpenAnimation])
-
-  useFrame((state, delta) => {
-    if (mixerRef.current) {
-      mixerRef.current.update(delta)
-    }
-  })
-
-  const playCloseAnimations = () => {
-    stopAllAnimations()
-    playAnimation('Back_close')
-    playAnimation('Front_close')
-  }
-
-  const playOpenAnimations = () => {
-    stopAllAnimations()
-    playAnimation('Back_open')
-    playAnimation('Front_open')
-  }
-
-  const stopAllAnimations = () => {
-    Object.values(actionsRef.current).forEach(action => {
-      action.stop()
-    })
-  }
-
-  const playAnimation = (clipName) => {
-    const action = actionsRef.current[clipName]
-    if (action) {
-      action.reset().play()
-    }
-  }
-
-  return (
-    <Suspense fallback={null}>
-      <primitive object={scene} {...props} />
-    </Suspense>
-  )
-}
-
-export function SummaryModel({ model, playOpenAnimation, color, ...props }) {
-  const { scene } = useGLTF(`/models/${model}.glb`, configureDRACOLoader)
-  const { animations } = useGLTF(`/models/${model}.glb`)
-  const mixerRef = useRef()
-  const [isOpen, setIsOpen] = useState(false)
-  const actionsRef = useRef({})
-
-  useEffect(() => {
-    if (scene) {
-      const mixer = new THREE.AnimationMixer(scene)
-      mixerRef.current = mixer
-
-      // Initialize actions
-      animations.forEach(clip => {
-        const action = mixer.clipAction(clip)
-        action.clampWhenFinished = true
-        action.setLoop(THREE.LoopOnce)
-        actionsRef.current[clip.name] = action
-      })
-
-      // Play initial close animations
-      playCloseAnimations()
-
-      // Apply color to all meshes
-      if (color) {
-        scene.traverse((child) => {
-          if (child.isMesh) {
-            if ((child.name.includes('Paint') || child.name === 'Roof_SE' || child.name === 'Left_Mirror' || child.name === 'Right_Mirror' || child.name === 'Right_Mirrorless_Panel' || child.name === 'Left_Mirrorless_Panel')) {
-              child.material = new THREE.MeshStandardMaterial({
-                color,
-                metalness: 0.3,
-                roughness: 0.15,
-              })
-            }
-          }
-        })
-      }
-    }
-  }, [scene, animations, color])
-
-  useEffect(() => {
-    if (playOpenAnimation !== isOpen) {
-      if (playOpenAnimation) {
-        playOpenAnimations()
-      } else {
-        playCloseAnimations()
-      }
-      setIsOpen(playOpenAnimation)
-    }
-  }, [playOpenAnimation])
-
-  useFrame((state, delta) => {
-    if (mixerRef.current) {
-      mixerRef.current.update(delta)
-    }
-  })
-
-  const playCloseAnimations = () => {
-    stopAllAnimations()
-    playAnimation('Back_close')
-    playAnimation('Front_close')
-  }
-
-  const playOpenAnimations = () => {
-    stopAllAnimations()
-    playAnimation('Back_open')
-    playAnimation('Front_open')
-  }
-
-  const stopAllAnimations = () => {
-    Object.values(actionsRef.current).forEach(action => {
-      action.stop()
-    })
-  }
-
-  const playAnimation = (clipName) => {
-    const action = actionsRef.current[clipName]
-    if (action) {
-      action.reset().play()
-    }
-  }
+  }, [scene, color])
 
   return (
     <Suspense fallback={null}>

@@ -57,7 +57,6 @@ export default function CarPageContent({ car, trim }) {
           <Suspense fallback={null}>
             <group position={[0, -2, 0]}>
               <InteriorModel
-                route='/trim'
                 scale={12}
                 model={cars[car][trim].interiorModel.model[selectedColor]}
                 playOpenAnimation={playOpenAnimation}

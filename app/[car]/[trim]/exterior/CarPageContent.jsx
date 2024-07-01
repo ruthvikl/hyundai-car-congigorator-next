@@ -83,7 +83,6 @@ export default function Page({ car, trim }) {
           <Suspense fallback={null}>
             <group position={[0, 0.3, 0]}>
               <ExteriorModel
-                route='/trim'
                 scale={12}
                 model={cars[car][trim].exteriorModel.model}
                 color={cars[car][trim].exteriorColors[selectedColor].color}

@@ -41,10 +41,10 @@ export default function CarPageContent({ car, trim }) {
         <View className='h-72 sm:h-48 sm:w-full'>
           <Suspense fallback={null}>
             <SummaryModel
-              route='/trim'
               scale={2}
               position={[0, -1.6, 0]}
               model={cars[car][trim].exteriorModel.model}
+              color={cars[car][trim].exteriorColors[exteriorColor].color}
             />
             <Common color={cars[car][trim].exteriorColors[exteriorColor].color} />
           </Suspense>
