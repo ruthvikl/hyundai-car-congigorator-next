@@ -10,9 +10,7 @@ import { Modal } from '@/components/modal'
 import NebulaComponent from '@/components/Three/Nebula'
 import { useLoader } from '@react-three/fiber'
 import Cone from '@/components/Three/Cone'
-import { DoubleSide, NormalBlending, TextureLoader } from 'three'
-import { EffectComposer, Bloom, BrightnessContrast, HueSaturation, ToneMapping } from '@react-three/postprocessing'
-import { ToneMappingMode } from 'postprocessing'
+import { NormalBlending, TextureLoader } from 'three'
 
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
@@ -155,12 +153,6 @@ export default function Page({ car, trim }) {
                     scale={[1.8, 1.8, 1.8]}
                     visible={showCone}
                   />
-                  <EffectComposer disableNormalPass>
-                    <Bloom mipmapBlur luminanceThreshold={1} intensity={0.7} />
-                    <BrightnessContrast brightness={0} contrast={0.1} />
-                    <HueSaturation hue={0} saturation={0} />
-                    <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
-                  </EffectComposer>
                 </group>
               )}
               {showNebula && <NebulaComponent />}

@@ -34,7 +34,7 @@ export default function CarPageContent({ car, trim }) {
   const [selectedColor, setSelectedColor] = useState(Object.keys(cars[car][trim].interiorColors)[0])
   const [playOpenAnimation, setPlayOpenAnimation] = useState(false)
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-  const [showAmbient, setShowAmbient] = useState(true)
+  const [showAmbient, setShowAmbient] = useState(false)
   const [selectedAmbientColor, setSelectedAmbientColor] = useState('#4c66f7')
   const [showHotspot, setShowHotspot] = useState(false)
   const [hotspotTitle, setHotspotTitle] = useState('')
@@ -95,7 +95,7 @@ export default function CarPageContent({ car, trim }) {
                   position={[6, 7, 0]}
                   rotation={[0, 11, 0]}
                   scale={[1, 1, 1]}
-                    visible={!showHotspot}
+                  visible={!showHotspot}
                   onClick={handleHotspotVisionRoof}
                   cameraTarget={[-13, -1, 0]} // Example target position
                 />
@@ -125,7 +125,7 @@ export default function CarPageContent({ car, trim }) {
               />
             ))}
           </div>
-          { showAmbient && trim !== 'SE' &&
+          {showAmbient && trim !== 'SE' &&
             <div className='flex flex-row justify-evenly overflow-x-auto px-2 py-1 rounded-full gap-5 w-11/12 bg-gray-100/70 mx-auto'>
               <div className={`size-4 bg-[#4c66f7] rounded-full ${selectedAmbientColor === '#4c66f7' ? 'border-2 border-white' : ''}`} onClick={() => setSelectedAmbientColor('#4c66f7')}>
               </div>
