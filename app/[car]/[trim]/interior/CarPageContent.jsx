@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic'
 import { Suspense, useState, useRef } from 'react'
 import { cars } from '@/data/cars'
 import { Hotspot } from '@/components/canvas/Hotspot'
+import { Modal } from '@/components/modal'
 
 // files
 
@@ -34,6 +35,9 @@ export default function CarPageContent({ car, trim }) {
   const [selectedColor, setSelectedColor] = useState(Object.keys(cars[car][trim].interiorColors)[0])
   const [playOpenAnimation, setPlayOpenAnimation] = useState(false)
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const [showHotspot, setShowHotspot] = useState(false)
+  const [hotspotTitle, setHotspotTitle] = useState('')
+  const [hotspotDescription, setHotspotDescription] = useState('')
 
   const audioRef = useRef(null);
 
@@ -47,7 +51,9 @@ export default function CarPageContent({ car, trim }) {
   }
 
   const handleHotspotVisionRoof = () => {
-    console.log('vision roof clicked')
+    setHotspotTitle('Vision Roof')
+    setHotspotDescription(cars[car][trim].hotspots.interior['Vision Roof'].description)
+    setShowHotspot(true)
     setPlayOpenAnimation(true)
   }
   const handleEnded = () => {
@@ -81,17 +87,21 @@ export default function CarPageContent({ car, trim }) {
                 model={cars[car][trim].interiorModel.model[selectedColor]}
                 playOpenAnimation={playOpenAnimation}
               />
-              <Hotspot
-                position={[6, 7, 0]}
-                rotation={[0, 11, 0]}
-                scale={[1, 1, 1]}
-                onClick={handleHotspotVisionRoof}
-                cameraTarget={[-13, -1, 0]} // Example target position
-              />
+              {trim !== 'SE' && (
+                <Hotspot
+                  position={[6, 7, 0]}
+                  rotation={[0, 11, 0]}
+                  scale={[1, 1, 1]}
+                    visible={!showHotspot}
+                  onClick={handleHotspotVisionRoof}
+                  cameraTarget={[-13, -1, 0]} // Example target position
+                />
+              )}
               <Hotspot
                 position={[-13, 1, 0]}
                 rotation={[0, 5, 0]}
                 scale={[1, 1, 1]}
+                visible={!showHotspot}
                 onClick={handleHotspotAudio}
                 cameraTarget={[1, 0, 0]} // Example target position
               />
@@ -144,6 +154,7 @@ export default function CarPageContent({ car, trim }) {
         </svg>
         <p>Back</p>
       </div>
+      <Modal visible={showHotspot} setVisibility={setShowHotspot} title={hotspotTitle} description={hotspotDescription} />
     </div>
   )
 }

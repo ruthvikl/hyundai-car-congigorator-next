@@ -71,11 +71,6 @@ const cars = {
                 "interior": {
                     "Interactive touch screen with sounds": {
                         "description": "The widescreen display dominates the dashboard, seamless integrating with the 12.3 inch digital gauges",
-                        "position": [0, 0, 0],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1, 1],
-                        "cameraTarget": [0, 0, 0],
-                        "showNebulaCharging": false
                     },
                 }
             }
@@ -156,6 +151,14 @@ const cars = {
                         "description": "Spanning Across the front, between the headlines and bumper, this lighting accents adds a premium touch",
                     },
                 },
+                "interior": {
+                    "Interactive touch screen with sounds": {
+                        "description": "The widescreen display dominates the dashboard, seamless integrating with the 12.3 inch digital gauges",
+                    },
+                    "Vision Roof": {
+                        "description": "This expansive glass panel across the entire ceiling without a beam going across",
+                    }
+                }
             }
         },
         'D100 Platinum Edition': {
@@ -201,6 +204,14 @@ const cars = {
                         "description": "Spanning Across the front, between the headlines and bumper, this lighting accents adds a premium touch",
                     },
                 },
+                "interior": {
+                    "Interactive touch screen with sounds": {
+                        "description": "The widescreen display dominates the dashboard, seamless integrating with the 12.3 inch digital gauges",
+                    },
+                    "Vision Roof": {
+                        "description": "This expansive glass panel across the entire ceiling without a beam going across",
+                    }
+                }
             }
         },
     },
