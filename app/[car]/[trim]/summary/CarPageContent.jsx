@@ -38,7 +38,7 @@ export default function CarPageContent({ car, trim }) {
       <h1 className='text-3xl text-center'>{car}</h1>
       <p className='text-center text-lg'>{trim}</p>
       <div className='mt-2 w-11/12 mx-auto relative rounded-xl'>
-        <View orbit className='h-72 sm:h-48 sm:w-full'>
+        <View className='h-72 sm:h-48 sm:w-full'>
           <Suspense fallback={null}>
             <Duck
               route='/trim'

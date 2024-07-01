@@ -56,13 +56,6 @@ const Interior = ({ color }) => {
 }
 
 const Common = ({ color }) => {
-  const orbitRef = useRef();
-
-  useEffect(() => {
-    if (orbitRef.current) {
-      orbitRef.current.domElement.style.pointerEvents = 'none';
-    }
-  }, []);
   return (
     <Suspense fallback={null}>
       {color && <color attach='background' args={[color]} />}
@@ -70,7 +63,6 @@ const Common = ({ color }) => {
       <ambientLight intensity={2} />
       <PerspectiveCamera makeDefault fov={60} position={[-6, 0, 6]} />
       <OrbitControls
-        ref={orbitRef}
         enableZoom={false}
         minPolarAngle={Math.PI / 5}
         maxPolarAngle={Math.PI / 2.5}
@@ -83,7 +75,7 @@ const Common = ({ color }) => {
   )
 }
 
-const View = forwardRef(({ children, orbit, ...props }, ref) => {
+const View = forwardRef(({ children, ...props }, ref) => {
   const localRef = useRef(null)
   useImperativeHandle(ref, () => localRef.current)
 
@@ -93,7 +85,6 @@ const View = forwardRef(({ children, orbit, ...props }, ref) => {
       <Three>
         <ViewImpl track={localRef}>
           {children}
-          {orbit}
         </ViewImpl>
       </Three>
     </>

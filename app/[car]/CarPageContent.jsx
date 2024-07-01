@@ -45,7 +45,7 @@ export default function Page({ car }) {
               {trim === 'image' ? null : (
               <div className='text-black min-w-72 mx-auto py-5 items-center rounded-lg cursor-pointer h-fit mt-5
                   bg-gradient-to-br from-gray-200/40 to-transparent bg-clip-padding backdrop-filter backdrop-blur-sm'>
-                  <View orbit className='h-48'>
+                  <View className='h-48'>
                     <Suspense fallback={null}>
                       <Duck route='/trim' scale={2} position={[0, 0, 0]} model={cars[car][trim].exteriorModel.model} />
                       <Common color={'gray'} />

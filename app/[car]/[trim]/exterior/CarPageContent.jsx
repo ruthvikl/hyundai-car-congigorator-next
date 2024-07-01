@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import { cars } from '@/data/cars'
 import { Hotspot } from '@/components/canvas/Hotspot'
 import { Modal } from '@/components/modal'
+import NebulaComponent from '@/components/Three/Nebula'
 
 const Trim = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.trim), { ssr: false })
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
@@ -33,6 +34,8 @@ export default function Page({ car, trim }) {
   const [showHotspot, setShowHotspot] = useState(false)
   const [hotspotTitle, setHotspotTitle] = useState('')
   const [hotspotDescription, setHotspotDescription] = useState('')
+  const [nebulaPosition, setNebulaPosition] = useState([2, 40, -100]);
+  const [showNebulaCharging, setShowNebulaCharging] = useState(false)
   const handleSelectClick = () => {
     router.push(`/${car}/${trim}/interior?exteriorColor=${selectedColor}`)
   }
@@ -56,6 +59,7 @@ export default function Page({ car, trim }) {
     setHotspotTitle('Ultra-fast charging')
     setHotspotDescription(cars[car][trim].hotspots.exterior['Ultra-fast charging'].description)
     showHotspot ? setShowHotspot(false) : setShowHotspot(true)
+    setShowNebulaCharging(true);
   };
 
   const handleHotspotMirror = () => {
@@ -70,7 +74,7 @@ export default function Page({ car, trim }) {
       <p className='text-center text-lg'>{trim}</p>
       <p className='text-center text-lg'>Customize your vehicle</p>
       <div className='mt-2 w-11/12 mx-auto relative rounded-xl'>
-        <View orbit className='h-96 sm:h-48 sm:w-full'>
+        <View className='h-96 sm:h-48 sm:w-full'>
           <Suspense fallback={null}>
             <group position={[0, 0.3, 0]}>
               <Duck
