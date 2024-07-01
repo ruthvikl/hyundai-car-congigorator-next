@@ -125,23 +125,25 @@ export default function Page({ car, trim }) {
                 cameraTarget={[40, 15, -20]} // Example target position
                 isHotspotClicked={showHotspot}
               />
-              <group position={[-7, 10.3, -12]}>
-                <Hotspot
-                  rotation={[0, 11, 0]}
-                  scale={[2, 2, 2]}
-                  visible={!showHotspot}
-                  onClick={handleHotspotMirror}
-                  cameraTarget={[50, 15, -20]} // Example target position
-                />
-                <Cone position={[4, 0, -1]} rotation={[1.5, 0, 1.1]} scale={[4.5, 9, 4.5]} visible={showCone} />
-                <ImagePlane
-                  imageUrl="/Blind_Spot_image.png"
-                  position={[15, 0.05, -6]}
-                  rotation={[0, 1.4, 0]}
-                  scale={[1.8, 1.8, 1.8]}
-                  visible={showCone}
-                />
-              </group>
+              {trim !== 'SE' && (
+                <group position={[-7, 10.3, -12]}>
+                  <Hotspot
+                    rotation={[0, 11, 0]}
+                    scale={[2, 2, 2]}
+                    visible={!showHotspot}
+                    onClick={handleHotspotMirror}
+                    cameraTarget={[50, 15, -20]} // Example target position
+                  />
+                  <Cone position={[4, 0, -1]} rotation={[1.5, 0, 1.1]} scale={[4.5, 9, 4.5]} visible={showCone} />
+                  <ImagePlane
+                    imageUrl="/Blind_Spot_image.png"
+                    position={[15, 0.05, -6]}
+                    rotation={[0, 1.4, 0]}
+                    scale={[1.8, 1.8, 1.8]}
+                    visible={showCone}
+                  />
+                </group>
+              )}
               {showNebula && <NebulaComponent />}
             </group>
             <Exterior color={cars[car][trim].exteriorColors[selectedColor].color} />
