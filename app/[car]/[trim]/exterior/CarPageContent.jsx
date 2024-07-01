@@ -99,6 +99,7 @@ export default function Page({ car, trim }) {
       <p className='text-center text-lg'>{trim}</p>
       <p className='text-center text-lg'>Customize your vehicle</p>
       <div className='mt-2 w-11/12 mx-auto relative rounded-xl'>
+        <Modal visible={showHotspot} setVisibility={setShowHotspot} title={hotspotTitle} description={hotspotDescription} />
         <View className='h-96 sm:h-48 sm:w-full'>
           <Suspense fallback={null}>
             <group position={[0, 0.3, 0]}>
@@ -194,7 +195,6 @@ export default function Page({ car, trim }) {
         </svg>
         <p>Back</p>
       </div>
-      <Modal visible={showHotspot} setVisibility={setShowHotspot} title={hotspotTitle} description={hotspotDescription} />
     </div>
   )
 }

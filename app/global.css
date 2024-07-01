@@ -72,6 +72,8 @@
 }
 
 .fade-in {
+  opacity: 0;
   animation: fadeIn 2s ease-in-out forwards;
+  animation-delay: 1.5s;
   pointer-events: auto;
 }

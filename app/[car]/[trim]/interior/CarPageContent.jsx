@@ -81,6 +81,7 @@ export default function CarPageContent({ car, trim }) {
       <h1 className='text-3xl text-center'>{car}</h1>
       <p className='text-center text-lg'>{trim}</p>
       <div className='mt-2 w-11/12 mx-auto relative rounded-xl'>
+        <Modal visible={showHotspot} setVisibility={setShowHotspot} title={hotspotTitle} description={hotspotDescription} />
         <View className='h-96 sm:h-48 sm:w-full'>
           <Suspense fallback={null}>
             <group position={[0, -2, 0]}>
@@ -166,7 +167,6 @@ export default function CarPageContent({ car, trim }) {
         </svg>
         <p>Back</p>
       </div>
-      <Modal visible={showHotspot} setVisibility={setShowHotspot} title={hotspotTitle} description={hotspotDescription} />
     </div>
   )
 }

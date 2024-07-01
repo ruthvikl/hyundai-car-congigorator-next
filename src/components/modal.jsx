@@ -15,15 +15,17 @@ export const Modal = ({ visible, setVisibility, title, description }) => {
 
   return (
     <div
-      className={`fixed w-full z-20 bottom-10 pointer-events-none ${visible ? 'fade-in block' : hasInteracted ? 'fade-out' : 'hidden'}`}
+      className={`absolute w-full z-20 top-1 pointer-events-none ${visible ? 'fade-in block' : hasInteracted ? 'fade-out' : 'hidden'}`}
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
       aria-describedby="modal-description"
     >
-      <div className="text-white w-10/12 bg-black/60 rounded-lg mx-auto p-5 text-center flex flex-col justify-center pointer-events-auto">
-        <p className="text-lg" id="modal-title">{title}</p>
-        <p className="text-sm" id="modal-description">{description}</p>
+      <div className="text-white w-9/12 bg-black/35 rounded-lg mx-auto p-2 text-center flex flex-col justify-center pointer-events-auto gap-2">
+        <div className="flex flex-col gap-2">
+          <p className="text-sm" id="modal-title">{title}</p>
+          <p className="text-xs" id="modal-description">{description}</p>
+        </div>
         <button 
           className="bg-white w-fit mx-auto text-black rounded-full px-2 py-0.5"
           onClick={handleXClick}
