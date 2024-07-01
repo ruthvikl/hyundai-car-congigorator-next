@@ -69,11 +69,13 @@ const Common = ({ color }) => {
         target={[0, 0, 0]}
         autoRotate={true}
         autoRotateSpeed={1.0}
-        enableTouch={false}
+        enablePan={false}
+        enableRotate={false}
       />
     </Suspense>
   )
 }
+
 
 const View = forwardRef(({ children, ...props }, ref) => {
   const localRef = useRef(null)
