@@ -1,6 +1,6 @@
 'use client'
 
-import { Duck } from '@/components/canvas/Examples'
+import { TrimsModel } from '@/components/canvas/Examples'
 import dynamic from 'next/dynamic'
 import { Suspense } from 'react'
 import { useRouter } from 'next/navigation'
@@ -47,7 +47,7 @@ export default function Page({ car }) {
                   bg-gradient-to-br from-gray-200/40 to-transparent bg-clip-padding backdrop-filter backdrop-blur-sm'>
                   <View className='h-48'>
                     <Suspense fallback={null}>
-                      <Duck route='/trim' scale={2} position={[0, 0, 0]} model={cars[car][trim].exteriorModel.model} />
+                      <TrimsModel route='/trim' scale={2} position={[0, 0, 0]} model={cars[car][trim].exteriorModel.model} />
                       <Common color={'gray'} />
                     </Suspense>
                   </View>

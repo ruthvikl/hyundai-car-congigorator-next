@@ -4,8 +4,8 @@ import { Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import dynamic from 'next/dynamic'
 import { cars } from '@/data/cars'
+import { SummaryModel } from '@/components/canvas/Examples'
 
-const Duck = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Duck), { ssr: false })
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
   loading: () => (
@@ -40,7 +40,7 @@ export default function CarPageContent({ car, trim }) {
       <div className='mt-2 w-11/12 mx-auto relative rounded-xl'>
         <View className='h-72 sm:h-48 sm:w-full'>
           <Suspense fallback={null}>
-            <Duck
+            <SummaryModel
               route='/trim'
               scale={2}
               position={[0, -1.6, 0]}

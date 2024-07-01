@@ -1,6 +1,6 @@
 'use client'
 
-import { Duck } from '@/components/canvas/Examples'
+import { InteriorModel } from '@/components/canvas/Examples'
 import { useRouter, useSearchParams } from 'next/navigation'
 import dynamic from 'next/dynamic'
 import { Suspense, useState } from 'react'
@@ -56,7 +56,7 @@ export default function CarPageContent({ car, trim }) {
         <View className='h-96 sm:h-48 sm:w-full'>
           <Suspense fallback={null}>
             <group position={[0, -2, 0]}>
-              <Duck
+              <InteriorModel
                 route='/trim'
                 scale={12}
                 model={cars[car][trim].interiorModel.model[selectedColor]}

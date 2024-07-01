@@ -1,6 +1,6 @@
 'use client'
 
-import { Duck } from '@/components/canvas/Examples'
+import { ExteriorModel } from '@/components/canvas/Examples'
 import dynamic from 'next/dynamic'
 import { Suspense, useState } from 'react'
 import { useRouter } from 'next/navigation'
@@ -82,7 +82,7 @@ export default function Page({ car, trim }) {
         <View className='h-96 sm:h-48 sm:w-full'>
           <Suspense fallback={null}>
             <group position={[0, 0.3, 0]}>
-              <Duck
+              <ExteriorModel
                 route='/trim'
                 scale={12}
                 model={cars[car][trim].exteriorModel.model}
