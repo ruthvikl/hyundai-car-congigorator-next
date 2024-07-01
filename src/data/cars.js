@@ -145,14 +145,16 @@ const cars = {
                 }
             },
             "hotspots": {
-                "Blind Spot View Monitor ": {
-                    "description": "When you signal to change lanes, a live camera feed of the lane will appear on the digital instrument gauge display",
-                },
-                "Ultra-fast charging": {
-                    "description": "With up to 350-kW 800 volt charger, charge your vehicle from 10 - 80 percent in just 80 minutes",
-                },
-                "Premium front LED accent lighting": {
-                    "description": "Spanning Across the front, between the headlines and bumper, this lighting accents adds a premium touch",
+                "exterior": {
+                    "Blind Spot View Monitor ": {
+                        "description": "When you signal to change lanes, a live camera feed of the lane will appear on the digital instrument gauge display",
+                    },
+                    "Ultra-fast charging": {
+                        "description": "With up to 350-kW 800 volt charger, charge your vehicle from 10 - 80 percent in just 80 minutes",
+                    },
+                    "Premium front LED accent lighting": {
+                        "description": "Spanning Across the front, between the headlines and bumper, this lighting accents adds a premium touch",
+                    },
                 },
             }
         },
@@ -185,22 +187,24 @@ const cars = {
                 }
             },
             "hotspots": {
-                "Blind Spot View Monitor ": {
-                    "description": "When you signal to change lanes, a live camera feed of the lane will appear on the digital instrument gauge display",
-                },
-                "Disney/mickey badges": {
-                    "description": "",
-                },
-                "Ultra-fast charging": {
-                    "description": "With up to 350-kW 800 volt charger, charge your vehicle from 10 - 80 percent in just 80 minutes",
-                },
-                "Premium front LED accent lighting": {
-                    "description": "Spanning Across the front, between the headlines and bumper, this lighting accents adds a premium touch",
+                "exterior": {
+                    "Blind Spot View Monitor ": {
+                        "description": "When you signal to change lanes, a live camera feed of the lane will appear on the digital instrument gauge display",
+                    },
+                    "Disney/mickey badges": {
+                        "description": "",
+                    },
+                    "Ultra-fast charging": {
+                        "description": "With up to 350-kW 800 volt charger, charge your vehicle from 10 - 80 percent in just 80 minutes",
+                    },
+                    "Premium front LED accent lighting": {
+                        "description": "Spanning Across the front, between the headlines and bumper, this lighting accents adds a premium touch",
+                    },
                 },
             }
         },
     },
-    'IONIQ 6': {
+    'IONIQ6': {
         'image': 'ioniq6',
         'SE': {
             'image': 'SE6',

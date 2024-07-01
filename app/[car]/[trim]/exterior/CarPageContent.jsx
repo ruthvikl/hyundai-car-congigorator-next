@@ -6,6 +6,7 @@ import { Suspense, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { cars } from '@/data/cars'
 import { Hotspot } from '@/components/canvas/Hotspot'
+import { Modal } from '@/components/modal'
 
 const Trim = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.trim), { ssr: false })
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
@@ -28,6 +29,9 @@ const Exterior = dynamic(() => import('@/components/canvas/View').then((mod) => 
 export default function Page({ car, trim }) {
   const router = useRouter()
   const [selectedColor, setSelectedColor] = useState(Object.keys(cars[car][trim].exteriorColors)[0])
+  const [showHotspot, setShowHotspot] = useState(false)
+  const [hotspotTitle, setHotspotTitle] = useState('')
+  const [hotspotDescription, setHotspotDescription] = useState('')
   const handleSelectClick = () => {
     router.push(`/${car}/${trim}/interior?exteriorColor=${selectedColor}`)
   }
@@ -37,15 +41,26 @@ export default function Page({ car, trim }) {
   }
 
   const handleHotspotHeadLight = () => {
-    console.log('Headlight clicked')
+    if((trim === 'Limited' || trim === 'D100 Platinum Edition') && car === 'SE'){
+      setHotspotTitle('Premium front LED accent lighting"')
+      setHotspotDescription(cars[car][trim].hotspots.exterior['Premium front LED accent lighting'].description)
+    }else {
+      setHotspotTitle('LED Projector headlights')
+      setHotspotDescription(cars[car][trim].hotspots.exterior['LED Projector headlights'].description)
+    }
+    setShowHotspot(true)
   };
 
   const handleHotspotCharging = () => {
-    console.log('Charging clicked')
+    setHotspotTitle('Ultra-fast charging')
+    setHotspotDescription(cars[car][trim].hotspots.exterior['Ultra-fast charging'].description)
+    showHotspot ? setShowHotspot(false) : setShowHotspot(true)
   };
 
   const handleHotspotMirror = () => {
-    console.log('Charging clicked')
+    setHotspotTitle('Blind Spot View Monitor')
+    setHotspotDescription(cars[car][trim].hotspots.exterior['Blind Spot View Monitor'].description)
+    showHotspot ? setShowHotspot(false) : setShowHotspot(true)
   };
 
   return (
@@ -141,6 +156,7 @@ export default function Page({ car, trim }) {
         </svg>
         <p>Back</p>
       </div>
+      <Modal visible={showHotspot} setVisibility={setShowHotspot} title={hotspotTitle} description={hotspotDescription} />
     </div>
   )
 }
