@@ -13,6 +13,7 @@ export default function RootLayout({ children }) {
         <head /> will contain the components returned by the nearest parent
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
+      <link rel="icon" href="/icons/favicon.ico" sizes="any" />
       <head />
       <body>
         <div className='flex flex-col gap-2 mx-auto w-full h-screen overflow-y-scroll'>

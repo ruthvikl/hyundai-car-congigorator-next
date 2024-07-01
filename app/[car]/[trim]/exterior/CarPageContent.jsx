@@ -119,7 +119,7 @@ export default function Page({ car, trim }) {
                 key={color}
                 alt={color}
                 onClick={() => setSelectedColor(color)}
-                src={`/colors/${cars[car][trim].exteriorColors[color].img}.png`}
+                src={`/colors/${cars[car][trim].exteriorColors[color].image}.png`}
                 className={`w-1/12 lg:w-1/12 ${selectedColor === color ? 'border-2 border-white rounded-full' : ''}`}
               />
             ))}

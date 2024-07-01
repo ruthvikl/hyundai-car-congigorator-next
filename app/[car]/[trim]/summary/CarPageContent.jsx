@@ -55,7 +55,7 @@ export default function CarPageContent({ car, trim }) {
       <div className="text-left w-11/12 mx-auto mt-5">
         <div className="border-b border-black flex flex-row py-1 gap-5">
           <img    
-            src={`/colors/${cars[car][trim].exteriorColors[exteriorColor].img}.png`}
+            src={`/colors/${cars[car][trim].exteriorColors[exteriorColor].image}.png`}
             className="w-2/12"
             alt="Exterior color"
           />
@@ -66,7 +66,7 @@ export default function CarPageContent({ car, trim }) {
         </div>
         <div className="border-b border-black flex flex-row py-1 gap-5">
           <img
-            src={`/colors/${cars[car][trim].interiorColors[interiorColor].img}.png`}
+            src={`/colors/${cars[car][trim].interiorColors[interiorColor].image}.png`}
             className="w-2/12"
             alt="Interior color"
           />
