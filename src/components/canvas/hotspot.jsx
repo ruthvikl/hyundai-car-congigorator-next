@@ -4,26 +4,23 @@ import { TextureLoader, Vector3 } from 'three';
 import * as THREE from 'three';
 import CameraController from '@/data/Cameracontroller';
 
-export const Hotspot = ({ position, rotation, scale, onClick, visible, cameraTarget }) => {
+export const Hotspot = ({ position, rotation, scale, onClick, visible, cameraTarget, isHotspotClicked }) => {
     const hotspotRef = useRef();
     const { camera } = useThree();
     const [baseScale] = useState(scale); // Initial scale
     const timeRef = useRef(0); // Time accumulator for animation
-    const [isHotspotClicked, setIsHotspotClicked] = useState(false); // State to track hotspot click
     const [shouldReturn, setShouldReturn] = useState(false); // State to handle return animation
     const initialCameraPositionRef = useRef(camera.position.clone()); // Store initial camera position
 
     useEffect(() => {
-        let timer;
-        if (isHotspotClicked) {
-            timer = setTimeout(() => {
-                setShouldReturn(true); // Trigger return animation after 5 seconds
-                console.log('hello')
-            }, 6000);
+        if(!visible) {
+            console.log('should return');
+            setShouldReturn(true);
+        } else {
+            setShouldReturn(false);
+            console.log('should not return');
         }
-
-        return () => clearTimeout(timer); // Clean up the timer on unmount
-    }, [isHotspotClicked]);
+    }, [visible]);
 
     useFrame((state, delta) => {
         if (hotspotRef.current) {
@@ -49,7 +46,6 @@ export const Hotspot = ({ position, rotation, scale, onClick, visible, cameraTar
 
     const handleHotspotClick = () => {
         initialCameraPositionRef.current.copy(camera.position); // Store the current camera position
-        setIsHotspotClicked(true); // Set the state to true when the hotspot is clicked
         onClick(); // Call the onClick function passed as a prop
     };
 
@@ -65,20 +61,16 @@ export const Hotspot = ({ position, rotation, scale, onClick, visible, cameraTar
             >
                 <boxGeometry args={[1, 1, 1]} />
             </mesh>
-            {isHotspotClicked && !shouldReturn && (
+            {visible && (
                 <CameraController
                     targetPosition={cameraTarget}
                     duration={1.5}
                 />
             )}
-            {shouldReturn && (
+            {!visible && (
                 <CameraController
                     targetPosition={initialCameraPositionRef.current.toArray()}
                     duration={1.5}
-                    onComplete={() => {
-                        setIsHotspotClicked(false);
-                        setShouldReturn(false);
-                    }}
                 />
             )}
         </>

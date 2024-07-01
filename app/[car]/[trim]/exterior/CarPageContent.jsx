@@ -12,7 +12,6 @@ import { useLoader } from '@react-three/fiber'
 import Cone from '@/components/Three/Cone'
 import { DoubleSide, NormalBlending, TextureLoader } from 'three'
 
-const Trim = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.trim), { ssr: false })
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
   loading: () => (
@@ -112,20 +111,25 @@ export default function Page({ car, trim }) {
                 position={[-29, 5, 7]}
                 rotation={[0, 15, 0]}
                 scale={[2, 2, 2]}
+                visible={!showHotspot}
                 onClick={handleHotspotHeadLight}
                 cameraTarget={[-45, 10, 10]}
+                isHotspotClicked={showHotspot}
               />
               <Hotspot
                 position={[21.5, 8, -11]}
                 rotation={[0, 11, 0]}
                 scale={[2, 2, 2]}
+                visible={!showHotspot}
                 onClick={handleHotspotCharging}
                 cameraTarget={[40, 15, -20]} // Example target position
+                isHotspotClicked={showHotspot}
               />
               <group position={[-7, 10.3, -12]}>
                 <Hotspot
                   rotation={[0, 11, 0]}
                   scale={[2, 2, 2]}
+                  visible={!showHotspot}
                   onClick={handleHotspotMirror}
                   cameraTarget={[50, 15, -20]} // Example target position
                 />

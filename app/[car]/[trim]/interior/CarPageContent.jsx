@@ -37,7 +37,6 @@ export default function CarPageContent({ car, trim }) {
     router.push(`/${car}/${trim}/summary?exteriorColor=${exteriorColor}&interiorColor=${selectedColor}`)
   }
 
-
   const handleBackClick = () => {
     router.push(`/${car}/${trim}/exterior`)
   }
@@ -46,7 +45,6 @@ export default function CarPageContent({ car, trim }) {
     console.log('vision roof clicked')
     setPlayOpenAnimation(true)
   }
-
 
   return (
     <div>
