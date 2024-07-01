@@ -3,7 +3,7 @@ const cars = {
         'image': 'ioniq5',
         'SE': {
             'image': 'SE',
-            'description': 'The base trim with the most affordable price',
+            'description': 'The balanced trim with plenty of must-have features',
             'exteriorModel': {
                 'model': 'ioniq5_SE_Exterior',
                 'material': 'SE',
@@ -82,7 +82,7 @@ const cars = {
         },
         'Limited': {
             'image': 'limited',
-            'description': 'The base trim with the most affordable price',
+            'description': 'The premium trim that treats you with high-end features',
             'exteriorModel': {
                 'model': 'ioniq5_Limited_Exterior',
                 'material': 'Limited',
@@ -160,7 +160,7 @@ const cars = {
         },
         'D100 Platinum Edition': {
             'image': 'D100PlatinumEdition',
-            'description': 'The base trim with the most affordable price',
+            'description': 'Available in extremely limited quantities',
             'exteriorModel': {
                 'model': 'ioniq5_D100_Exterior',
                 'material': 'D100',
@@ -208,6 +208,7 @@ const cars = {
         'image': 'ioniq6',
         'SE': {
             'image': 'SE6',
+            'description': 'The standard trim with lots of great features',
             'exteriorModel': {
                 'model': 'ioniq5_SE_Exterior',
                 'material': 'Paint',
@@ -258,6 +259,7 @@ const cars = {
         },
         'SEL': {
             'image': 'SEL6',
+            'description': 'The balance trim with plenty of must-have featuress',
             'exteriorModel': {
                 'model': 'ioniq5_Limited_Exterior',
                 'material': 'Paint',
@@ -319,6 +321,7 @@ const cars = {
         },
         'Limited': {
             'image': 'Limited6',
+            'description': 'The premium electric trim that treats you with high end features',
             'exteriorModel': {
                 'model': 'Ioniq_5_D100',
                 'material': 'Paint',

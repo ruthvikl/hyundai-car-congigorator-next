@@ -56,7 +56,7 @@ export default function Page({ car }) {
                     <p className='text-xs text-center font-[HyundaiSansHead-Light]'>{cars[car][trim].description}</p>
                   </div>
                   <div
-                    className='text-center border-2 py-2 border-black w-full mt-10 font-[HyundaiSansHead-Regular] cursor-pointer'
+                    className={`text-center border-2 py-2 border-black w-full ${trim === 'Limited' ? 'mt-1' :'mt-5'} font-[HyundaiSansHead-Regular] cursor-pointer`}
                     onClick={() => handleSelectClick(trim)}
                   >
                     Select {trim}
