@@ -3,9 +3,11 @@
 import { InteriorModel } from '@/components/canvas/Examples'
 import { useRouter, useSearchParams } from 'next/navigation'
 import dynamic from 'next/dynamic'
-import { Suspense, useState } from 'react'
+import { Suspense, useState, useRef } from 'react'
 import { cars } from '@/data/cars'
 import { Hotspot } from '@/components/canvas/Hotspot'
+
+// files
 
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
@@ -31,6 +33,9 @@ export default function CarPageContent({ car, trim }) {
   car = decodeURIComponent(car)
   const [selectedColor, setSelectedColor] = useState(Object.keys(cars[car][trim].interiorColors)[0])
   const [playOpenAnimation, setPlayOpenAnimation] = useState(false)
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+
+  const audioRef = useRef(null);
 
   const router = useRouter()
   const handleSelectClick = () => {
@@ -45,6 +50,23 @@ export default function CarPageContent({ car, trim }) {
     console.log('vision roof clicked')
     setPlayOpenAnimation(true)
   }
+  const handleEnded = () => {
+    setIsAudioPlaying(false);
+  };
+
+  const handleHotspotAudio = () => {
+    console.log('Hotspot Interior SE clicked!');
+    const audioArray = [
+      '/audiO/01_Forest_Sample.mp3',
+      '/audiO/03_Rain_Sample.mp3',
+      '/audiO/02_Wave_Sample.mp3',
+    ]
+    const audio = new Audio(audioArray[Math.floor(Math.random() * audioArray.length)]);
+    audioRef.current = audio;
+    audio.addEventListener('ended', handleEnded);
+    audio.play();
+    setIsAudioPlaying(true);
+  };
 
   return (
     <div>
@@ -65,6 +87,13 @@ export default function CarPageContent({ car, trim }) {
                 scale={[1, 1, 1]}
                 onClick={handleHotspotVisionRoof}
                 cameraTarget={[-13, -1, 0]} // Example target position
+              />
+              <Hotspot
+                position={[-13, 1, 0]}
+                rotation={[0, 5, 0]}
+                scale={[1, 1, 1]}
+                onClick={handleHotspotAudio}
+                cameraTarget={[1, 0, 0]} // Example target position
               />
             </group>
 
