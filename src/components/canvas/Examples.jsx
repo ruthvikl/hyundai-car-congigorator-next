@@ -68,17 +68,19 @@ export function Duck({ model, playOpenAnimation, color, ...props }) {
       playCloseAnimations()
 
       // Apply color to all meshes
-      scene.traverse((child) => {
-        if (child.isMesh) {
-          if ((child.name.includes('Paint') || child.name === 'Roof_SE' || child.name === 'Left_Mirror' || child.name === 'Right_Mirror' || child.name === 'Right_Mirrorless_Panel' || child.name === 'Left_Mirrorless_Panel')) {
-            child.material = new THREE.MeshStandardMaterial({
-              color,
-              metalness: 0.3,
-              roughness: 0.15,
-            })
+      if(color){
+        scene.traverse((child) => {
+          if (child.isMesh) {
+            if ((child.name.includes('Paint') || child.name === 'Roof_SE' || child.name === 'Left_Mirror' || child.name === 'Right_Mirror' || child.name === 'Right_Mirrorless_Panel' || child.name === 'Left_Mirrorless_Panel')) {
+              child.material = new THREE.MeshStandardMaterial({
+                color,
+                metalness: 0.3,
+                roughness: 0.15,
+              })
+            }
           }
-        }
-      })
+        })
+      }
     }
   }, [scene, animations, color])
 
