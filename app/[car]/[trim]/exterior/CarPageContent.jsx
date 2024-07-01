@@ -34,8 +34,8 @@ export default function Page({ car, trim }) {
   const [showHotspot, setShowHotspot] = useState(false)
   const [hotspotTitle, setHotspotTitle] = useState('')
   const [hotspotDescription, setHotspotDescription] = useState('')
-  const [nebulaPosition, setNebulaPosition] = useState([2, 40, -100]);
-  const [showNebulaCharging, setShowNebulaCharging] = useState(false)
+  const [showNebula, setShowNebula] = useState(false);
+
   const handleSelectClick = () => {
     router.push(`/${car}/${trim}/interior?exteriorColor=${selectedColor}`)
   }
@@ -56,10 +56,15 @@ export default function Page({ car, trim }) {
   };
 
   const handleHotspotCharging = () => {
-    setHotspotTitle('Ultra-fast charging')
-    setHotspotDescription(cars[car][trim].hotspots.exterior['Ultra-fast charging'].description)
-    showHotspot ? setShowHotspot(false) : setShowHotspot(true)
-    setShowNebulaCharging(true);
+    setHotspotTitle('Ultra-fast charging');
+    setHotspotDescription(cars[car][trim].hotspots.exterior['Ultra-fast charging'].description);
+    setShowHotspot(prev => !prev);
+
+    // Show NebulaComponent and remove it after 5 seconds
+    setShowNebula(true);
+    setTimeout(() => {
+      setShowNebula(false);
+    }, 5000);
   };
 
   const handleHotspotMirror = () => {
@@ -112,6 +117,7 @@ export default function Page({ car, trim }) {
                   visible={showCone}
                 /> */}
               </group>
+              {showNebula && <NebulaComponent />}
             </group>
             <Exterior color={cars[car][trim].exteriorColors[selectedColor].color} />
           </Suspense>

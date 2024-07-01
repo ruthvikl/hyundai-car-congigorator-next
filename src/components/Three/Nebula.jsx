@@ -34,14 +34,14 @@ const NebulaComponent = ({ position }) => {
             if (nebula) {
                 // Stop the animation loop
                 isMounted = false;
-
+        
                 // Remove all emitters from the scene
                 nebulaRef.current.emitters.forEach((emitter) => {
                     // Stop emitter's updates
                     emitter.destroy();
                     emitter.removeAllParticles();
                 });
-
+        
                 // Destroy the Nebula instance
                 nebula.destroy();
                 nebulaRef.current = null;

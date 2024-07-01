@@ -13,8 +13,8 @@
           "perSecondMin": 0.01,
           "perSecondMax": 0.01
         },
-        "position": { "x": 8, "y": 11, "z":-50 },
-        "rotation": { "x":110, "y": 60, "z": 0 },
+        "position": { "x": 22, "y": 8, "z":-13 },
+        "rotation": { "x":1, "y": 1, "z": 0 },
         "initializers": [
           {
             "id": "51ca9451-3d8b-11e9-a1e8-4785d9606b75",
@@ -77,8 +77,8 @@
             "id": "51ca9458-3d8b-11e9-a1e8-4785d9606b75",
             "type": "Scale",
             "properties": {
-              "scaleA": 0.4,
-              "scaleB": 0.4,
+              "scaleA": 0.5,
+              "scaleB": 0.5,
               "life": null,
               "easing": "easeLinear"
             }
@@ -87,7 +87,7 @@
             "id": "51ca9459-3d8b-11e9-a1e8-4785d9606b75",
             "type": "Force",
             "properties": {
-              "fx": 4,
+              "fx": 0,
               "fy": 0,
               "fz": 5,
               "life": null,
