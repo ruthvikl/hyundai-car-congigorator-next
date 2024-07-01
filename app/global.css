@@ -58,6 +58,7 @@
 
 .fade-out {
   animation: fadeOut 2s ease-in-out forwards;
+  pointer-events: none;
 }
 
 @keyframes fadeIn {
@@ -71,5 +72,6 @@
 }
 
 .fade-in {
-animation: fadeIn 2s ease-in-out forwards;
+  animation: fadeIn 2s ease-in-out forwards;
+  pointer-events: auto;
 }
