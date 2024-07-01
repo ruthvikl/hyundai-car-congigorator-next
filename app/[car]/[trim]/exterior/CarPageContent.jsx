@@ -37,7 +37,7 @@ export default function Page({ car, trim }) {
   }
 
   const handleHotspotHeadLight = () => {
-    alert('Headlight clicked')
+    console.log('Headlight clicked')
   };
 
   return (
@@ -59,6 +59,7 @@ export default function Page({ car, trim }) {
                 rotation={[0, 15, 0]}
                 scale={[2, 2, 2]}
                 onClick={handleHotspotHeadLight}
+                cameraTarget={[-45, 10, 10]}
               />
             </group>
             <Exterior color={cars[car][trim].exteriorColors[selectedColor].color} />
