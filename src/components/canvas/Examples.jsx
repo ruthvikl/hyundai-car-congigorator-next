@@ -44,7 +44,7 @@ export const Logo = ({ route = '/trim', car, ...props }) => {
   )
 }
 
-export function Duck({ model, playOpenAnimation, ...props }) {
+export function Duck({ model, playOpenAnimation, color, ...props }) {
   const { scene } = useGLTF(`/models/${model}.glb`, configureDRACOLoader)
   const { animations } = useGLTF(`/models/${model}.glb`)
   const mixerRef = useRef()
@@ -66,8 +66,21 @@ export function Duck({ model, playOpenAnimation, ...props }) {
 
       // Play initial close animations
       playCloseAnimations()
+
+      // Apply color to all meshes
+      scene.traverse((child) => {
+        if (child.isMesh) {
+          if ((child.name.includes('Paint') || child.name === 'Roof_SE' || child.name === 'Left_Mirror' || child.name === 'Right_Mirror' || child.name === 'Right_Mirrorless_Panel' || child.name === 'Left_Mirrorless_Panel')) {
+            child.material = new THREE.MeshStandardMaterial({
+              color,
+              metalness: 0.3,
+              roughness: 0.15,
+            })
+          }
+        }
+      })
     }
-  }, [scene, animations])
+  }, [scene, animations, color])
 
   useEffect(() => {
     if (playOpenAnimation !== isOpen) {

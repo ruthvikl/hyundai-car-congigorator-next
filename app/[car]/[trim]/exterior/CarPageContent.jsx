@@ -86,6 +86,7 @@ export default function Page({ car, trim }) {
                 route='/trim'
                 scale={12}
                 model={cars[car][trim].exteriorModel.model}
+                color={cars[car][trim].exteriorColors[selectedColor].color}
               />
               <Hotspot
                 position={[-29, 5, 7]}
