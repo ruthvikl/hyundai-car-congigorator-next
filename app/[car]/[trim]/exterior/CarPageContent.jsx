@@ -40,6 +40,14 @@ export default function Page({ car, trim }) {
     console.log('Headlight clicked')
   };
 
+  const handleHotspotCharging = () => {
+    console.log('Charging clicked')
+  };
+
+  const handleHotspotMirror = () => {
+    console.log('Charging clicked')
+  };
+
   return (
     <div>
       <h1 className='text-3xl text-center'>{car}</h1>
@@ -61,6 +69,29 @@ export default function Page({ car, trim }) {
                 onClick={handleHotspotHeadLight}
                 cameraTarget={[-45, 10, 10]}
               />
+              <Hotspot
+                position={[21.5, 8, -11]}
+                rotation={[0, 11, 0]}
+                scale={[2, 2, 2]}
+                onClick={handleHotspotCharging}
+                cameraTarget={[40, 15, -20]} // Example target position
+              />
+              <group position={[-7, 10.3, -12]}>
+                <Hotspot
+                  rotation={[0, 11, 0]}
+                  scale={[2, 2, 2]}
+                  onClick={handleHotspotMirror}
+                  cameraTarget={[50, 15, -10]} // Example target position
+                />
+                {/* <Cone position={[3, 0, -5]} rotation={[1.6, 0, 0.6]} scale={[2, 6, 2]} visible={showCone} />
+                <ImagePlane
+                  imageUrl="/Blind_Spot_image.png"
+                  position={[6.5, 0.05, -9.95]}
+                  rotation={[0, 2.55, 0]}
+                  scale={[0.85, 0.85, 0.85]}
+                  visible={showCone}
+                /> */}
+              </group>
             </group>
             <Exterior color={cars[car][trim].exteriorColors[selectedColor].color} />
           </Suspense>
