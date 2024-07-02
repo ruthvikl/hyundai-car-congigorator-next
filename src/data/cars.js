@@ -159,7 +159,10 @@ const cars = {
                     },
                     "Vision Roof": {
                         "description": "This expansive glass panel across the entire ceiling without a beam going across",
-                    }
+                    },
+                    "Ambient Lighting": {
+                        "description": "Set the mood with more inviting interior with ambient lighting on the door.",
+                    },
                 }
             }
         },
@@ -213,7 +216,10 @@ const cars = {
                     },
                     "Vision Roof": {
                         "description": "This expansive glass panel across the entire ceiling without a beam going across",
-                    }
+                    },
+                    "Ambient Lighting": {
+                        "description": "Set the mood with more inviting interior with ambient lighting on the door.",
+                    },
                 }
             }
         },

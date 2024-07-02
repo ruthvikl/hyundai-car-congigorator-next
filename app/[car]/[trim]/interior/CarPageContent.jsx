@@ -34,14 +34,16 @@ export default function CarPageContent({ car, trim }) {
   car = decodeURIComponent(car)
   const [selectedColor, setSelectedColor] = useState(Object.keys(cars[car][trim].interiorColors)[0])
   const [playOpenAnimation, setPlayOpenAnimation] = useState(false)
-  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-  const [showAmbient, setShowAmbient] = useState(true)
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false)
+  const [showAmbient, setShowAmbient] = useState(false)
   const [selectedAmbientColor, setSelectedAmbientColor] = useState('#4c66f7')
   const [showHotspot, setShowHotspot] = useState(false)
   const [hotspotTitle, setHotspotTitle] = useState('')
   const [hotspotDescription, setHotspotDescription] = useState('')
+  const [pointLightVisible, setPointLightVisible] = useState(false)
+  const [pointLightColor, setPointLightColor] = useState('#ffffff')
 
-  const audioRef = useRef(null);
+  const audioRef = useRef(null)
 
   const router = useRouter()
   const handleSelectClick = () => {
@@ -59,33 +61,53 @@ export default function CarPageContent({ car, trim }) {
     setPlayOpenAnimation(true)
   }
   const handleEnded = () => {
-    setIsAudioPlaying(false);
-  };
+    setIsAudioPlaying(false)
+  }
 
   useEffect(() => {
     if (!showHotspot && audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-      setIsAudioPlaying(false);
+      audioRef.current.pause()
+      audioRef.current.currentTime = 0
+      setIsAudioPlaying(false)
     }
-  }, [showHotspot]);
+  }, [showHotspot])
 
   const handleHotspotAudio = () => {
-    console.log('Hotspot Interior SE clicked!');
+    console.log('Hotspot Interior SE clicked!')
     const audioArray = [
-      '/audiO/01_Forest_Sample.mp3',
-      '/audiO/03_Rain_Sample.mp3',
-      '/audiO/02_Wave_Sample.mp3',
+      '/audio/01_Forest_Sample.mp3',
+      '/audio/03_Rain_Sample.mp3',
+      '/audio/02_Wave_Sample.mp3',
     ]
-    const audio = new Audio(audioArray[Math.floor(Math.random() * audioArray.length)]);
-    audioRef.current = audio;
-    audio.addEventListener('ended', handleEnded);
-    audio.play();
-    setIsAudioPlaying(true);
+    const audio = new Audio(audioArray[Math.floor(Math.random() * audioArray.length)])
+    audioRef.current = audio
+    audio.addEventListener('ended', handleEnded)
+    audio.play()
+    setIsAudioPlaying(true)
     setHotspotTitle('Interactive touch screen with sounds')
     setHotspotDescription(cars[car][trim].hotspots.interior['Interactive touch screen with sounds'].description)
     setShowHotspot(true)
-  };
+  }
+
+  const handleHotspotAmbientLight = () => {
+    console.log('Hotspot Interior Ambient!')
+    setHotspotTitle('Ambient Lighting')
+    setHotspotDescription(cars[car][trim].hotspots.interior['Ambient Lighting'].description)
+    setShowHotspot(true)
+    setPointLightVisible(true)
+    setPointLightColor(selectedAmbientColor)
+  }
+
+  useEffect(() => {
+    if(hotspotTitle === 'Ambient Lighting') {
+    setShowAmbient(showHotspot)
+    }
+  }, [showHotspot])
+
+  useEffect(() => {
+    setPointLightColor(selectedAmbientColor)
+  }, [selectedAmbientColor])
+
 
   return (
     <div>
@@ -106,7 +128,7 @@ export default function CarPageContent({ car, trim }) {
               {/* <Sunray /> */}
               {trim !== 'SE' && (
                 <Hotspot
-                  position={[9, 7, 0]}
+                  position={[8, 7, 0]}
                   rotation={[0, 11, 0]}
                   scale={[1, 1, 1]}
                   visible={!showHotspot}
@@ -114,6 +136,18 @@ export default function CarPageContent({ car, trim }) {
                   cameraTarget={[-10, 0, 0]} // Example target position
                 />
               )}
+              {/* Ambient Light hotspot */}
+              {trim !== 'SE' && (
+                <Hotspot
+                  position={[-10, -3, 8]}
+                  rotation={[0, 5, 0]}
+                  scale={[1.3, 1.3, 1.3]}
+                  visible={!showHotspot}
+                  onClick={handleHotspotAmbientLight}
+                  cameraTarget={[1, 0, 0]} // Example target position
+                />
+              )}
+
               <Hotspot
                 position={[-10, 1, 0]}
                 rotation={[0, 5, 0]}
@@ -122,12 +156,30 @@ export default function CarPageContent({ car, trim }) {
                 onClick={handleHotspotAudio}
                 cameraTarget={[1, 0, 0]} // Example target position
               />
+
+              <pointLight
+                position={[-7, 0, -4]}
+                color={pointLightColor}
+                intensity={70}
+                distance={200}
+                decay={2}
+                visible={showHotspot && hotspotTitle === 'Ambient Lighting'}
+              />
+
+              <pointLight
+                position={[-7, 0, 4]}
+                color={pointLightColor}
+                intensity={70}
+                distance={200}
+                decay={2}
+                visible={showHotspot && hotspotTitle === 'Ambient Lighting'}
+              />
             </group>
 
             <Interior color={cars[car][trim].interiorColors[selectedColor].color} />
           </Suspense>
         </View>
-        <div className={`relative  z-10 ${showAmbient ? 'bottom-20 flex flex-col gap-2' : 'bottom-11'}`}>
+        <div className={`relative z-10 ${showAmbient ? 'bottom-20 flex flex-col gap-2' : 'bottom-11'}`}>
           <div className='flex flex-row justify-evenly overflow-x-auto px-2 py-1 rounded-full gap-5 w-11/12 bg-gray-100/70 mx-auto'>
             {Object.keys(cars[car][trim].interiorColors).map((color) => (
               <img
@@ -139,7 +191,7 @@ export default function CarPageContent({ car, trim }) {
               />
             ))}
           </div>
-          {showAmbient && trim !== 'SE' &&
+          {showAmbient && trim !== 'SE' && (
             <div className='flex flex-row justify-evenly overflow-x-auto px-2 py-1 rounded-full gap-5 w-11/12 bg-gray-100/70 mx-auto'>
               <div className={`size-4 bg-[#4c66f7] rounded-full ${selectedAmbientColor === '#4c66f7' ? 'border-2 border-white' : ''}`} onClick={() => setSelectedAmbientColor('#4c66f7')}>
               </div>
@@ -148,7 +200,7 @@ export default function CarPageContent({ car, trim }) {
               <div className={`size-4 bg-[#daf25b] rounded-full ${selectedAmbientColor === '#daf25b' ? 'border-2 border-white' : ''}`} onClick={() => setSelectedAmbientColor('#daf25b')}>
               </div>
             </div>
-          }
+          )}
         </div>
       </div>
       <div
@@ -160,7 +212,7 @@ export default function CarPageContent({ car, trim }) {
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
             viewBox='0 0 24 24'
-            strokewtrimth='2.5'
+            strokeWidth='2.5'
             stroke='currentColor'
             className='size-6 absolute right-0'
           >
