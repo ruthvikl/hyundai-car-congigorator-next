@@ -200,17 +200,19 @@ export default function CarPageContent({ car, trim }) {
           </Suspense>
         </View>
         <div className={`relative z-10 ${showAmbient ? 'bottom-20 flex flex-col gap-2' : 'bottom-11'}`}>
-          <div className='flex flex-row justify-evenly overflow-x-auto px-2 py-1 rounded-full gap-5 w-11/12 bg-gray-100/70 mx-auto'>
-            {Object.keys(cars[car][trim].interiorColors).map((color) => (
-              <img
-                key={color}
-                alt={color}
-                onClick={() => setSelectedColor(color)}
-                src={`/colors/${cars[car][trim].interiorColors[color].image}.png`}
-                className={`w-1/12 lg:w-1/12 ${selectedColor === color ? 'border-2 border-white rounded-full' : ''}`}
-              />
-            ))}
-          </div>
+          {!showAmbient && (
+            <div className='flex flex-row justify-evenly overflow-x-auto px-2 py-1 rounded-full gap-5 w-11/12 bg-gray-100/70 mx-auto'>
+              {Object.keys(cars[car][trim].interiorColors).map((color) => (
+                <img
+                  key={color}
+                  alt={color}
+                  onClick={() => setSelectedColor(color)}
+                  src={`/colors/${cars[car][trim].interiorColors[color].image}.png`}
+                  className={`w-1/12 lg:w-1/12 ${selectedColor === color ? 'border-2 border-white rounded-full' : ''}`}
+                />
+              ))}
+            </div>
+          )}
           {showAmbient && trim !== 'SE' && (
             <div className='flex flex-row justify-evenly overflow-x-auto px-2 py-1 rounded-full gap-5 w-11/12 bg-gray-100/70 mx-auto'>
               <div className={`size-4 bg-[#4c66f7] rounded-full ${selectedAmbientColor === '#4c66f7' ? 'border-2 border-white' : ''}`} onClick={() => setSelectedAmbientColor('#4c66f7')}>
