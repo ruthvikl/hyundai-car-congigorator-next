@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import dynamic from 'next/dynamic'
 import { cars } from '@/data/cars'
 import { SummaryModel } from '@/components/canvas/Examples'
+import { ContactShadows } from '@react-three/drei'
 
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
@@ -42,11 +43,12 @@ export default function CarPageContent({ car, trim }) {
           <Suspense fallback={null}>
             <SummaryModel
               scale={12}
-              position={[0, -1.6, 0]}
+              position={[0, 2, 0]} 
               model={cars[car][trim].exteriorModel.model}
               color={cars[car][trim].exteriorColors[exteriorColor].color}
             />
             <Summary color={cars[car][trim].exteriorColors[exteriorColor].color} />
+            <ContactShadows renderOrder={2} frames={1} resolution={1024} scale={120} blur={2} opacity={0.8} far={70} />
           </Suspense>
         </View>
         <div className='relative bottom-11 z-10'>

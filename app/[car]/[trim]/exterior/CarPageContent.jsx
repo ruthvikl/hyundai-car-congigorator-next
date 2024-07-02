@@ -11,6 +11,7 @@ import NebulaComponent from '@/components/Three/Nebula'
 import { useLoader } from '@react-three/fiber'
 import Cone from '@/components/Three/Cone'
 import { NormalBlending, TextureLoader } from 'three'
+import { ContactShadows } from '@react-three/drei'
 import { EffectComposer, Bloom, BrightnessContrast, HueSaturation, ToneMapping } from '@react-three/postprocessing'
 import { ToneMappingMode } from 'postprocessing'
 
@@ -107,10 +108,11 @@ export default function Page({ car, trim }) {
             <group position={[0, 0.3, 0]}>
               <ExteriorModel
                 scale={12}
+                position={[0, 2, 0]}
                 model={cars[car][trim].exteriorModel.model}
                 color={cars[car][trim].exteriorColors[selectedColor].color}
               />
-              <group position={[-29, 5, 7]}>
+              <group position={[-29, 8, 7]}>
                 <Hotspot
                   rotation={[0, 15, 0]}
                   scale={[2, 2, 2]}
@@ -130,7 +132,7 @@ export default function Page({ car, trim }) {
                 )}
               </group>
               <Hotspot
-                position={[21.5, 8, -11]}
+                position={[21.5, 10, -11]}
                 rotation={[0, 11, 0]}
                 scale={[2, 2, 2]}
                 visible={!showHotspot}
@@ -139,7 +141,7 @@ export default function Page({ car, trim }) {
                 isHotspotClicked={showHotspot}
               />
               {trim !== 'SE' && (
-                <group position={[-7, 10.3, -12]}>
+                <group position={[-7, 12.3, -12]}>
                   <Hotspot
                     rotation={[0, 11, 0]}
                     scale={[2, 2, 2]}
@@ -159,6 +161,7 @@ export default function Page({ car, trim }) {
               )}
               {showNebula && <NebulaComponent />}
             </group>
+            <ContactShadows renderOrder={2} frames={1} resolution={1024} scale={120} blur={2} opacity={0.8} far={70} />
             <Exterior color={cars[car][trim].exteriorColors[selectedColor].color} />
             {/* <EffectComposer disableNormalPass>
               <Bloom mipmapBlur luminanceThreshold={1} intensity={0.7} />

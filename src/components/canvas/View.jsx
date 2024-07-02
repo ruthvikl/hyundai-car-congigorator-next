@@ -54,7 +54,7 @@ const Summary = ({ color }) => {
         enableRotate={false}
       />
       <Environment1 texture={texture} />
-      <Environment files="/envmaps/hdr/Environment-Map-Empty-Warehouse2K.hdr" ground={{ height: 35, radius: 100, scale: 200 }} />
+      <Environment files="/envmaps/hdr/Environment-Map-Empty-Warehouse2K.hdr" ground={{ height: 20, radius: 200, scale: 200 }} />
     </Suspense>
   )
 }
