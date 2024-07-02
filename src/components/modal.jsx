@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 export const Modal = ({ visible, setVisibility, title, description }) => {
   const [hasInteracted, setHasInteracted] = useState(false);
+  const [showBottom, setShowBottom] = useState(false);
 
   useEffect(() => {
     if (visible) {
@@ -9,13 +10,21 @@ export const Modal = ({ visible, setVisibility, title, description }) => {
     }
   }, [visible]);
 
+  useEffect(() => {
+    if(title === 'Vision Roof' || title === 'Premium front LED accent lighting' || title === 'Blind Spot View Monitor') {
+      setShowBottom(true);
+    } else {
+      setShowBottom(false);
+    }
+  }, [title]);
+
   const handleXClick = () => {
     setVisibility(false);
   };
 
   return (
     <div
-      className={`absolute w-full z-20 top-1 pointer-events-none ${visible ? 'fade-in block' : hasInteracted ? 'fade-out' : 'hidden'}`}
+      className={`absolute w-full z-20 pointer-events-none ${visible ? 'fade-in block' : hasInteracted ? 'fade-out' : 'hidden'} ${showBottom ? 'bottom-10' : 'top-1'}`}
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
