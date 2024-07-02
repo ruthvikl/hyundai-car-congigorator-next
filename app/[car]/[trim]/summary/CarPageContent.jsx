@@ -21,7 +21,7 @@ const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.
     </div>
   ),
 })
-const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Common), { ssr: false })
+const Summary = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Summary), { ssr: false })
 
 export default function CarPageContent({ car, trim }) {
   const searchParams = useSearchParams()
@@ -41,12 +41,12 @@ export default function CarPageContent({ car, trim }) {
         <View className='h-72 sm:h-48 sm:w-full'>
           <Suspense fallback={null}>
             <SummaryModel
-              scale={2}
+              scale={12}
               position={[0, -1.6, 0]}
               model={cars[car][trim].exteriorModel.model}
               color={cars[car][trim].exteriorColors[exteriorColor].color}
             />
-            <Common color={cars[car][trim].exteriorColors[exteriorColor].color} />
+            <Summary color={cars[car][trim].exteriorColors[exteriorColor].color} />
           </Suspense>
         </View>
         <div className='relative bottom-11 z-10'>

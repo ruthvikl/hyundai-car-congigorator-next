@@ -160,12 +160,12 @@ export default function Page({ car, trim }) {
               {showNebula && <NebulaComponent />}
             </group>
             <Exterior color={cars[car][trim].exteriorColors[selectedColor].color} />
-            <EffectComposer disableNormalPass>
+            {/* <EffectComposer disableNormalPass>
               <Bloom mipmapBlur luminanceThreshold={1} intensity={0.7} />
               <BrightnessContrast brightness={0} contrast={0.1} />
               <HueSaturation hue={0} saturation={0} />
               <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
-            </EffectComposer>
+            </EffectComposer> */}
           </Suspense>
         </View>
         <div className='relative bottom-11 z-10'>

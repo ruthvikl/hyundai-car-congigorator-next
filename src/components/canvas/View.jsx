@@ -34,6 +34,31 @@ const Exterior = ({ color }) => {
   )
 }
 
+const Summary = ({ color }) => {
+  const texture = useLoader(TextureLoader, '/envmaps/images/Environment-Map-Empty-Warehouse2K.jpg')
+
+  return (
+    <Suspense fallback={null}>
+      {color && <color attach='background' args={[color]} />}
+      <directionalLight intensity={6} color='white' position={[4, 5, 2]} />
+      <ambientLight intensity={2} />
+      <PerspectiveCamera makeDefault fov={60} position={[-50, 0, 40]} />
+      <OrbitControls
+        enableZoom={false}
+        minPolarAngle={Math.PI / 5}
+        maxPolarAngle={Math.PI / 2.5}
+        target={[-2, 0.3, 0]}
+        autoRotate={true}
+        autoRotateSpeed={1.0}
+        enablePan={false}
+        enableRotate={false}
+      />
+      <Environment1 texture={texture} />
+      <Environment files="/envmaps/hdr/Environment-Map-Empty-Warehouse2K.hdr" ground={{ height: 35, radius: 100, scale: 200 }} />
+    </Suspense>
+  )
+}
+
 const Interior = ({ color }) => {
   const texture = useLoader(TextureLoader, '/envmaps/images/Environment-Map-Empty-Warehouse2K.jpg')
 
@@ -94,4 +119,4 @@ const View = forwardRef(({ children, ...props }, ref) => {
 })
 View.displayName = 'View'
 
-export { Common, View, Exterior, Interior }
+export { Common, View, Exterior, Interior, Summary }
