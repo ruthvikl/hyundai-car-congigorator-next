@@ -5,6 +5,7 @@ const cars = {
             'image': 'SE',
             'description': 'The balanced trim with plenty of must-have features',
             'exteriorModel': {
+                'trimModel': 'ioniq5_SE_Exterior_Trim',
                 'model': 'ioniq5_SE_Exterior',
                 'material': 'SE',
                 'removables': ['Limited', 'D100']
@@ -79,6 +80,7 @@ const cars = {
             'image': 'limited',
             'description': 'The premium trim that treats you with high-end features',
             'exteriorModel': {
+                'trimModel': 'ioniq5_Limited_Exterior_Trim',
                 'model': 'ioniq5_Limited_Exterior',
                 'material': 'Limited',
                 'removables': ['SE', 'D100']
@@ -165,6 +167,7 @@ const cars = {
             'image': 'D100PlatinumEdition',
             'description': 'Available in extremely limited quantities',
             'exteriorModel': {
+                'trimModel': 'ioniq5_D100_Exterior_Trim',
                 'model': 'ioniq5_D100_Exterior',
                 'material': 'D100',
                 'removables': ['SE', 'Limited']
@@ -221,6 +224,7 @@ const cars = {
             'image': 'SE6',
             'description': 'The standard trim with lots of great features',
             'exteriorModel': {
+                'trimModel': 'ioniq5_SE_Exterior_Trim',
                 'model': 'ioniq5_SE_Exterior',
                 'material': 'Paint',
             },
@@ -272,6 +276,7 @@ const cars = {
             'image': 'SEL6',
             'description': 'The balance trim with plenty of must-have featuress',
             'exteriorModel': {
+                'trimModel': 'ioniq5_SE_Exterior_Trim',
                 'model': 'ioniq5_Limited_Exterior',
                 'material': 'Paint',
             },
@@ -334,6 +339,7 @@ const cars = {
             'image': 'Limited6',
             'description': 'The premium electric trim that treats you with high end features',
             'exteriorModel': {
+                'trimModel': 'ioniq5_SE_Exterior_Trim',
                 'model': 'Ioniq_5_D100',
                 'material': 'Paint',
             },
