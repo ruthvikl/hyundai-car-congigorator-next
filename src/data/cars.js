@@ -45,7 +45,7 @@ const cars = {
             },
             'interiorColors': {
                 'Black': {
-                    'image': 'abyss-black',
+                    'image': 'SE-5-Black',
                     'name': 'Black',
                     'color': '#000000'
                 },
@@ -131,12 +131,12 @@ const cars = {
             },
             'interiorColors': {
                 'Black': {
-                    'image': 'abyss-black',
+                    'image': 'limited-5-Black',
                     'name': 'Black',
                     'color': '#ffffff'
                 },
                 'Gray Green 2 Tone': {
-                    'image': 'abyss-black',
+                    'image': 'gray-green',
                     'name': 'Gray Green 2 Tone',
                     'color': '#6D6E6F'
                 }
@@ -190,7 +190,7 @@ const cars = {
             },
             'interiorColors': {
                 'Terra Brown 2 Tone': {
-                    'image': 'gravity-gold-matt',
+                    'image': 'terra-brown-2-tone',
                     'name': 'Terra Brown 2 Tone',
                     'color': '#6D6E6F'
                 }
@@ -272,7 +272,7 @@ const cars = {
             },
             'interiorColors': {
                 'Black': {
-                    'image': 'abyss-black',
+                    'image': 'SE-6-Black',
                     'name': 'Black',
                     'color': '#000000'
                 },
@@ -330,12 +330,12 @@ const cars = {
             },
             'interiorColors': {
                 'Black': {
-                    'image': 'abyss-black',
+                    'image': 'Limited-6-Black',
                     'name': 'Black',
                     'color': '#000000'
                 },
                 'Gray': {
-                    'image': 'abyss-black',
+                    'image': 'Limited-Gray',
                     'name': 'Gray',
                     'color': '#6D6E6F'
                 }
@@ -393,12 +393,12 @@ const cars = {
             },
             'interiorColors': {
                 'Black': {
-                    'image': 'abyss-black',
+                    'image': 'Limited-6-Black',
                     'name': 'Black',
                     'color': '#000000'
                 },
                 'Gray': {
-                    'image': 'abyss-black',
+                    'image': 'Limited-Gray',
                     'name': 'Gray',
                     'color': '#6D6E6F'
                 }

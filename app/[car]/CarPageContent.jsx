@@ -79,7 +79,7 @@ export default function Page({ car }) {
           )
         })}
       </div>
-      <div className='text-center w-1/5 flex flex-row mx-auto mt-5 items-center justify-evenly font-[HyundaiSansHead-Light]'>
+      <div className='text-center w-1/5 flex flex-row mx-auto mt-5 items-center justify-evenly font-[HyundaiSansHead-Light]' onClick={() => router.push('/')}>
         <svg
           xmlns='http://www.w3.org/2000/svg'
           fill='none'
