@@ -48,7 +48,7 @@ export default function Page({ car }) {
                   <View className='h-72 pointer-events-none'>
                     <Suspense fallback={null}>
                       <TrimsModel scale={2} position={[0, 0, 0]} model={cars[car][trim].exteriorModel.trimModel} />
-                      <Common color={'gray'} />
+                      <Common color={'#c2c2c2'} />
                     </Suspense>
                   </View>
                   <div>
