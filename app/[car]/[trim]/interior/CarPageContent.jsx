@@ -88,7 +88,9 @@ export default function CarPageContent({ car, trim }) {
     setHotspotTitle('Vision Roof')
     setHotspotDescription(cars[car][trim].hotspots.interior['Vision Roof'].description)
     setShowHotspot(true)
-    setPlayOpenAnimation(true)
+    setTimeout(() => {
+      setPlayOpenAnimation(true)
+    }, 1500)
   }
 
   useEffect(() => {
@@ -106,8 +108,8 @@ export default function CarPageContent({ car, trim }) {
   }
 
   useEffect(() => {
-    if(hotspotTitle === 'Ambient Lighting') {
-    setShowAmbient(showHotspot)
+    if (hotspotTitle === 'Ambient Lighting') {
+      setShowAmbient(showHotspot)
     }
   }, [showHotspot])
 

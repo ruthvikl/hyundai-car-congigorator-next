@@ -14,6 +14,7 @@ import { NormalBlending, TextureLoader } from 'three'
 import { ContactShadows } from '@react-three/drei'
 import { EffectComposer, Bloom, BrightnessContrast, HueSaturation, ToneMapping } from '@react-three/postprocessing'
 import { ToneMappingMode } from 'postprocessing'
+import AnimatedCylinder from '@/components/Three/AnimatedCylinder'
 
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
@@ -149,17 +150,18 @@ export default function Page({ car, trim }) {
                     onClick={handleHotspotMirror}
                     cameraTarget={[50, 15, -20]} // Example target position
                   />
-                  <Cone position={[4, 0, -1]} rotation={[1.5, 0, 1.1]} scale={[4.5, 9, 4.5]} visible={showCone} />
+                  <Cone position={[4, 0, -1]} rotation={[1.5, 0, 1.1]} scale={[4.5, 9, 4.5]} visible={showHotspot} />
                   <ImagePlane
                     imageUrl="/Blind_Spot_image.png"
                     position={[15, 0.05, -6]}
                     rotation={[0, 1.4, 0]}
                     scale={[1.8, 1.8, 1.8]}
-                    visible={showCone}
+                    visible={showHotspot}
                   />
                 </group>
               )}
               {showNebula && <NebulaComponent />}
+              {showNebula && <AnimatedCylinder />}
             </group>
             <ContactShadows renderOrder={2} frames={1} resolution={1024} scale={120} blur={2} opacity={0.8} far={70} />
             <Exterior color={cars[car][trim].exteriorColors[selectedColor].color} />
