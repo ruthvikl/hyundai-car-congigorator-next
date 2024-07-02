@@ -202,3 +202,31 @@ export function SummaryModel({ model, color, ...props }) {
     </Suspense>
   )
 }
+
+export function Sunray({...props }) {
+  const { scene } = useGLTF(`/models/Sunray.glb`, configureDRACOLoader)
+
+  useEffect(() => {
+    if (scene) {
+      // Apply color to all meshes
+      scene.traverse((child) => {
+        if (child.isMesh) {
+          if ((child.name === 'Cube')) {
+            console.log(child.name)
+            // child.material = new THREE.MeshStandardMaterial({
+            //   color,
+            //   metalness: 0.3,
+            //   roughness: 0.15,
+            // })
+          }
+        }
+      })
+    }
+  }, [scene])
+
+  return (
+    <Suspense fallback={null}>
+      <primitive object={scene} {...props} />
+    </Suspense>
+  )
+}

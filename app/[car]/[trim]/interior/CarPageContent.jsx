@@ -1,6 +1,7 @@
 'use client'
 
 import { InteriorModel } from '@/components/canvas/Examples'
+import { Sunray } from '@/components/canvas/Examples'
 import { useRouter, useSearchParams } from 'next/navigation'
 import dynamic from 'next/dynamic'
 import { Suspense, useState, useRef } from 'react'
@@ -86,18 +87,20 @@ export default function CarPageContent({ car, trim }) {
             <group position={[0, -2, 0]}>
               <InteriorModel
                 scale={12}
+                position={[3, 0, 0]}
                 color={selectedAmbientColor}
                 model={cars[car][trim].interiorModel.model[selectedColor]}
                 playOpenAnimation={playOpenAnimation}
               />
+              {/* <Sunray /> */}
               {trim !== 'SE' && (
                 <Hotspot
-                  position={[6, 7, 0]}
+                  position={[9, 7, 0]}
                   rotation={[0, 11, 0]}
                   scale={[1, 1, 1]}
                   visible={!showHotspot}
                   onClick={handleHotspotVisionRoof}
-                  cameraTarget={[-13, -1, 0]} // Example target position
+                  cameraTarget={[-10, 0, 0]} // Example target position
                 />
               )}
               <Hotspot

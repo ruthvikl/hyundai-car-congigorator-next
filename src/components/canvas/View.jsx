@@ -65,14 +65,14 @@ const Interior = ({ color }) => {
   return (
     <Suspense fallback={null}>
       {color && <color attach='background' args={[color]} />}
-      <directionalLight intensity={5} color='white' position={[0, 5, 0]} />
+      <directionalLight intensity={5} color='white' position={[0, 8, 0]} />
       <ambientLight intensity={2} />
-      <PerspectiveCamera makeDefault fov={60} position={[1, 0, 0]} />
+      <PerspectiveCamera makeDefault fov={70} position={[0.00001, 0, 0]} />
       <OrbitControls
         enableZoom={true}
         minPolarAngle={Math.PI / 10}
         maxPolarAngle={Math.PI / 1.9}
-        target={[0, 0.5, 0]}
+        target={[0, 0, 0]}
       />
       <Environment1 texture={texture} />
       <Environment files="/envmaps/hdr/Environment-Map-Empty-Warehouse2K.hdr" ground={{ height: 10, radius: 100, scale: 200 }} />
