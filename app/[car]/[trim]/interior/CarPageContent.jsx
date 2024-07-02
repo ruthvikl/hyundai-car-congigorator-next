@@ -128,11 +128,22 @@ export default function CarPageContent({ car, trim }) {
           <Suspense fallback={null}>
             <group position={[0, -2, 0]}>
               <InteriorModel
+                castShadow
+                receiveShadow
                 scale={12}
                 position={[2, 0, 0]}
                 color={selectedAmbientColor}
                 model={cars[car][trim].interiorModel.model[selectedColor]}
                 playOpenAnimation={playOpenAnimation}
+              />
+              <pointLight
+                castShadow
+                position={[0, 7, 0]}
+                color={'white'}
+                intensity={50}
+                distance={200}
+                decay={2}
+                visible={true}
               />
               {/* <Sunray /> */}
               {trim !== 'SE' && (

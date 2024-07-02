@@ -59,14 +59,26 @@ const Summary = ({ color }) => {
   )
 }
 
-const Interior = ({ color }) => {
-  const texture = useLoader(TextureLoader, '/envmaps/images/Environment-Map-Empty-Warehouse2K.jpg')
+const Interior = ({ color = 'white' }) => {
+  const texture = useLoader(TextureLoader, '/envmaps/images/Environment-Map-Empty-Warehouse2K.jpg');
 
   return (
     <Suspense fallback={null}>
       {color && <color attach='background' args={[color]} />}
-      <directionalLight intensity={5} color='white' position={[0, 8, 0]} />
-      <ambientLight intensity={2} />
+      <directionalLight
+        intensity={10} // Reduced intensity
+        color='white'
+        position={[0, 8, 0]}
+        shadow-mapSize-width={1024} // Shadow resolution
+        shadow-mapSize-height={1024}
+        shadow-camera-near={0.5}
+        shadow-camera-far={20} // Reduced shadow camera far clipping
+        shadow-camera-left={-10}
+        shadow-camera-right={10}
+        shadow-camera-top={10}
+        shadow-camera-bottom={-10}
+      />
+      <ambientLight intensity={1.5} />
       <PerspectiveCamera makeDefault fov={70} position={[0.00001, 0, 0]} />
       <OrbitControls
         enableZoom={true}
@@ -77,7 +89,7 @@ const Interior = ({ color }) => {
       <Environment1 texture={texture} />
       <Environment files="/envmaps/hdr/Environment-Map-Empty-Warehouse2K.hdr" ground={{ height: 10, radius: 100, scale: 200 }} />
     </Suspense>
-  )
+  );
 }
 
 const Common = ({ color }) => {
