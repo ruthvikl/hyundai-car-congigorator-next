@@ -54,12 +54,7 @@ export default function CarPageContent({ car, trim }) {
     router.push(`/${car}/${trim}/exterior`)
   }
 
-  const handleHotspotVisionRoof = () => {
-    setHotspotTitle('Vision Roof')
-    setHotspotDescription(cars[car][trim].hotspots.interior['Vision Roof'].description)
-    setShowHotspot(true)
-    setPlayOpenAnimation(true)
-  }
+
   const handleEnded = () => {
     setIsAudioPlaying(false)
   }
@@ -88,6 +83,20 @@ export default function CarPageContent({ car, trim }) {
     setHotspotDescription(cars[car][trim].hotspots.interior['Interactive touch screen with sounds'].description)
     setShowHotspot(true)
   }
+
+  const handleHotspotVisionRoof = () => {
+    console.log('hello')
+    setHotspotTitle('Vision Roof')
+    setHotspotDescription(cars[car][trim].hotspots.interior['Vision Roof'].description)
+    setShowHotspot(true)
+    setPlayOpenAnimation(true)
+  }
+
+  useEffect(() => {
+    if (hotspotTitle === 'Vision Roof') {
+      setPlayOpenAnimation(showHotspot)
+    }
+  }, [showHotspot])
 
   const handleHotspotAmbientLight = () => {
     console.log('Hotspot Interior Ambient!')
