@@ -34,7 +34,7 @@ export default function CarPageContent({ car, trim }) {
   const [selectedColor, setSelectedColor] = useState(Object.keys(cars[car][trim].interiorColors)[0])
   const [playOpenAnimation, setPlayOpenAnimation] = useState(false)
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-  const [showAmbient, setShowAmbient] = useState(false)
+  const [showAmbient, setShowAmbient] = useState(true)
   const [selectedAmbientColor, setSelectedAmbientColor] = useState('#4c66f7')
   const [showHotspot, setShowHotspot] = useState(false)
   const [hotspotTitle, setHotspotTitle] = useState('')

@@ -11,6 +11,8 @@ import NebulaComponent from '@/components/Three/Nebula'
 import { useLoader } from '@react-three/fiber'
 import Cone from '@/components/Three/Cone'
 import { NormalBlending, TextureLoader } from 'three'
+import { EffectComposer, Bloom, BrightnessContrast, HueSaturation, ToneMapping } from '@react-three/postprocessing'
+import { ToneMappingMode } from 'postprocessing'
 
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
@@ -158,6 +160,12 @@ export default function Page({ car, trim }) {
               {showNebula && <NebulaComponent />}
             </group>
             <Exterior color={cars[car][trim].exteriorColors[selectedColor].color} />
+            <EffectComposer disableNormalPass>
+              <Bloom mipmapBlur luminanceThreshold={1} intensity={0.7} />
+              <BrightnessContrast brightness={0} contrast={0.1} />
+              <HueSaturation hue={0} saturation={0} />
+              <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
+            </EffectComposer>
           </Suspense>
         </View>
         <div className='relative bottom-11 z-10'>
