@@ -12,7 +12,7 @@ export default function Page() {
   return (
     <div className='h-full flex flex-col justify-evenly overflow-y-scroll mt-2'>
       <video 
-        className={`fixed top-0 left-0 w-full h-full object-cover z-10 ${ended ? 'fade-out' : 'block'}`} 
+        className={`fixed top-0 left-0 size-full object-cover z-10 ${ended ? 'fade-out' : 'block'}`} 
         autoPlay 
         muted 
         onEnded={() => setEnded(true)}>
