@@ -77,3 +77,8 @@
   animation-delay: 1.5s;
   pointer-events: auto;
 }
+
+body {
+  background-color: #dfdfdf;
+  font-family: 'HyundaiSansHead-Bold';
+}
