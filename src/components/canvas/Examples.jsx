@@ -100,7 +100,6 @@ export function InteriorModel({ model, playOpenAnimation, color, ...props }) {
     scene.traverse((child) => {
       if (child.isMesh) {
         if (child.name.includes('Ambient')) {
-          console.log(child.name, color)
           child.material.color = color
           child.material.emissive = color
           child.material.emissiveIntensity = 7;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
@@ -212,7 +211,6 @@ export function Sunray({...props }) {
       scene.traverse((child) => {
         if (child.isMesh) {
           if ((child.name === 'Cube')) {
-            console.log(child.name)
             // child.material = new THREE.MeshStandardMaterial({
             //   color,
             //   metalness: 0.3,

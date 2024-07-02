@@ -68,7 +68,6 @@ export default function CarPageContent({ car, trim }) {
   }, [showHotspot])
 
   const handleHotspotAudio = () => {
-    console.log('Hotspot Interior SE clicked!')
     const audioArray = [
       '/audio/01_Forest_Sample.mp3',
       '/audio/03_Rain_Sample.mp3',
@@ -99,7 +98,6 @@ export default function CarPageContent({ car, trim }) {
   }, [showHotspot])
 
   const handleHotspotAmbientLight = () => {
-    console.log('Hotspot Interior Ambient!')
     setHotspotTitle('Ambient Lighting')
     setHotspotDescription(cars[car][trim].hotspots.interior['Ambient Lighting'].description)
     setShowHotspot(true)
