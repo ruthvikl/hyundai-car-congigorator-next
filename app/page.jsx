@@ -11,10 +11,14 @@ export default function Page() {
 
   return (
     <div className='h-full flex flex-col justify-evenly overflow-y-scroll mt-2'>
-      <video 
-        className={`fixed top-0 left-0 size-full object-cover z-10 ${ended ? 'fade-out' : 'block'}`} 
-        autoPlay 
-        muted 
+      <video
+        className={`fixed top-0 left-0 size-full object-cover z-10 ${ended ? 'fade-out' : 'block'}`}
+        autoPlay
+        // onClick={() => {
+        //   document.querySelector('video').play();
+        // }}
+        muted
+        playsInline
         onEnded={() => setEnded(true)}>
         <source src='/video/Animation_Intro.mp4' type='video/mp4' />
       </video>
