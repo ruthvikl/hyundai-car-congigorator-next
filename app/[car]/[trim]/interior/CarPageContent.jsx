@@ -4,7 +4,7 @@ import { InteriorModel } from '@/components/canvas/Examples'
 import { Sunray } from '@/components/canvas/Examples'
 import { useRouter, useSearchParams } from 'next/navigation'
 import dynamic from 'next/dynamic'
-import { Suspense, useState, useRef } from 'react'
+import { Suspense, useState, useRef, useEffect } from 'react'
 import { cars } from '@/data/cars'
 import { Hotspot } from '@/components/canvas/Hotspot'
 import { Modal } from '@/components/modal'
@@ -62,6 +62,14 @@ export default function CarPageContent({ car, trim }) {
     setIsAudioPlaying(false);
   };
 
+  useEffect(() => {
+    if (!showHotspot && audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      setIsAudioPlaying(false);
+    }
+  }, [showHotspot]);
+
   const handleHotspotAudio = () => {
     console.log('Hotspot Interior SE clicked!');
     const audioArray = [
@@ -74,6 +82,9 @@ export default function CarPageContent({ car, trim }) {
     audio.addEventListener('ended', handleEnded);
     audio.play();
     setIsAudioPlaying(true);
+    setHotspotTitle('Interactive touch screen with sounds')
+    setHotspotDescription(cars[car][trim].hotspots.interior['Interactive touch screen with sounds'].description)
+    setShowHotspot(true)
   };
 
   return (
@@ -87,7 +98,7 @@ export default function CarPageContent({ car, trim }) {
             <group position={[0, -2, 0]}>
               <InteriorModel
                 scale={12}
-                position={[3, 0, 0]}
+                position={[2, 0, 0]}
                 color={selectedAmbientColor}
                 model={cars[car][trim].interiorModel.model[selectedColor]}
                 playOpenAnimation={playOpenAnimation}
@@ -104,7 +115,7 @@ export default function CarPageContent({ car, trim }) {
                 />
               )}
               <Hotspot
-                position={[-13, 1, 0]}
+                position={[-10, 1, 0]}
                 rotation={[0, 5, 0]}
                 scale={[1, 1, 1]}
                 visible={!showHotspot}
