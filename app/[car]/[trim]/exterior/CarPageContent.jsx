@@ -150,13 +150,13 @@ export default function Page({ car, trim }) {
                     onClick={handleHotspotMirror}
                     cameraTarget={[50, 15, -20]} // Example target position
                   />
-                  <Cone position={[4, 0, -1]} rotation={[1.5, 0, 1.1]} scale={[4.5, 9, 4.5]} visible={showHotspot} />
+                  <Cone position={[4, 0, -1]} rotation={[1.5, 0, 1.1]} scale={[4.5, 9, 4.5]} visible={showHotspot && hotspotTitle === 'Blind Spot View Monitor'} />
                   <ImagePlane
                     imageUrl="/Blind_Spot_image.png"
                     position={[15, 0.05, -6]}
                     rotation={[0, 1.4, 0]}
                     scale={[1.8, 1.8, 1.8]}
-                    visible={showHotspot}
+                    visible={showHotspot && hotspotTitle === 'Blind Spot View Monitor'}
                   />
                 </group>
               )}

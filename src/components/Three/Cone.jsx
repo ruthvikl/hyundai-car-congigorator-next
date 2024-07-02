@@ -5,7 +5,7 @@ import { useSpring, animated } from '@react-spring/three';
 const Cone = ({ position, rotation, scale, visible }) => {
     const { animatedScale } = useSpring({
         animatedScale: visible ? scale : [0, 0, 0],
-        config: { duration: 2000 },
+        config: { duration: 1000 },
     });
 
     return (
